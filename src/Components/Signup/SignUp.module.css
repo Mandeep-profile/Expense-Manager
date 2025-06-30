@@ -1,0 +1,101 @@
+.wrapper {
+  padding: 20px;
+}
+
+.Expansodiv {
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  font-weight: 600;
+  margin-left: 50px;
+    font-family: "Inter", sans-serif;
+}
+
+.Expansoimage {
+  max-width: 120px;
+  height: 75px;
+  color: #1f2937;
+}
+
+.Personimage {
+  max-width: "500px";
+  height: 750px;
+  margin-top: -60px;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -75px;
+}
+
+.formSection {
+  border-radius: "1.25rem";
+  overflow: "hidden";
+  max-width: "960px";
+  width: "100%";
+  margin: 0 250px 150px 200px;
+  font-family: "Poppins", sans-serif;
+}
+
+.formHeading{
+    font-family: "Inter", sans-serif;
+    color: #1f2937;
+     margin-bottom: 10px;
+     font-size: 28px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 20px; */
+}
+
+.input {
+  width: 350px;
+  height: 45px;
+  border-radius: 5px;
+  padding-left: 10px;
+  font-size: 14px;
+  color: #1f2937;
+  border: 1px solid darkgray;
+  outline: none;
+}
+
+.label {
+  margin-bottom: 5px;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #1f2937;
+}
+
+.button {
+  width: 350px;
+  height: 45px;
+  margin-top: 20px;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  background-color: #1f2937;
+}
+
+.tagline {
+  font-size: 14px;
+  margin: -15px 0 100px 125px;
+  font-family: "Inter", sans-serif;
+  color: darkgray;
+}
+
+.account {
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  font-weight: 500;
+  color: #1f2937;
+}
