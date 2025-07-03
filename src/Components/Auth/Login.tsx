@@ -1,9 +1,10 @@
-import { FormData } from "../../Utils/JsonData";
 import personImg from "../../assets/Person__Image.png";
 import ExpansoLogo from "../../assets/Expanso_Logo.png";
-import styles from "./SignUp.module.css";
+import { LoginFormData } from "../../Utils/JsonData";
+import { Link } from "react-router-dom";
+import styles from "./Auth.module.css"
 
-const Signup = () => {
+const Login = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.Expansodiv}>
@@ -24,8 +25,8 @@ const Signup = () => {
         />
 
         <div className={styles.formSection}>
-          <h2 className={styles.formHeading}>Create Account</h2>
-          {FormData.map((field) => (
+          <h2 className={styles.formHeading}>Login Account</h2>
+          {LoginFormData.map((field) => (
             <div key={field.id} className={styles.inputGroup}>
               <label htmlFor={field.id} className={styles.label}>
                 {field.label}
@@ -39,17 +40,17 @@ const Signup = () => {
               />
             </div>
           ))}
-          <button className={styles.button}>Create Account</button>
+          <button className={styles.button}>Login Account</button>
           <p className={styles.account}>
-            Already have an account?{" "}
-            <a href="#" className={styles.link}>
-              Signin
-            </a>
+            Don't have an account?{" "}
+            <Link to="/" className={styles.link}>
+              Sign Up
+            </Link>
           </p>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Login

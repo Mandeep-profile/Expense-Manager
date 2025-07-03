@@ -8,7 +8,8 @@
   font-size: 28px;
   font-weight: 600;
   margin-left: 50px;
-    font-family: "Inter", sans-serif;
+  font-family: "Outfit", sans-serif;
+  user-select: none;
 }
 
 .Expansoimage {
@@ -39,11 +40,10 @@
   font-family: "Poppins", sans-serif;
 }
 
-.formHeading{
-    font-family: "Inter", sans-serif;
-    color: #1f2937;
-     margin-bottom: 10px;
-     font-size: 28px;
+.formHeading {
+  font-family: "Inter", sans-serif;
+  margin-bottom: 1 0px;
+  font-size: 28px;
 }
 
 .inputGroup {
@@ -54,7 +54,7 @@
 
 .input {
   width: 350px;
-  height: 45px;
+  height: 40px;
   border-radius: 5px;
   padding-left: 10px;
   font-size: 14px;
@@ -65,7 +65,7 @@
 
 .label {
   margin-bottom: 5px;
-  margin-top: 10px;
+  margin-top: 15px;
   font-size: 13px;
   color: #1f2937;
 }
@@ -79,18 +79,19 @@
   font-size: 16px;
   font-weight: 500;
   background-color: #1f2937;
+  font-family: "Outfit", sans-serif;
 }
 
 .tagline {
   font-size: 14px;
   margin: -15px 0 100px 125px;
-  font-family: "Inter", sans-serif;
+  font-family: "Outfit", sans-serif;
   color: darkgray;
 }
 
 .account {
   font-size: 13px;
-  margin-top: 10px;
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -98,4 +99,35 @@
   text-decoration: none;
   font-weight: 500;
   color: #1f2937;
+}
+
+.MainImg {
+  width: 100vw;
+  height: 100vh;
+  object-fit: fill;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  animation: none;
+  transition: transform 1s ease-in-out;
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.imageContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.slideUpOut {
+  transform: translateY(-100%);
 }
