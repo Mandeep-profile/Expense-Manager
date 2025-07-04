@@ -2,24 +2,28 @@ export const FormData = [
   {
     label: "Name",
     id: "FLName",
+    name: "name",
     type: "text",
     placeholder: "John Doe",
   },
   {
     label: "Email Address",
     id: "Email",
+    name: "email",
     type: "email",
     placeholder: "you@example.com",
   },
   {
     label: "Password",
     id: "password",
+    name: "password",
     type: "password",
     placeholder: "••••••••",
   },
   {
     label: "Confirm Password",
     id: "Cpassword",
+    name: "cpassword",
     type: "text",
     placeholder: "••••••••",
   },
@@ -29,12 +33,14 @@ export const LoginFormData = [
   {
     label: "Email Address",
     id: "Email",
+    name: "email",
     type: "email",
     placeholder: "you@example.com",
   },
   {
     label: "Password",
     id: "password",
+    name: "password",
     type: "password",
     placeholder: "••••••••",
   },

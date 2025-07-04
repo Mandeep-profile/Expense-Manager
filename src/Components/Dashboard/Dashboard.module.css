@@ -1,0 +1,225 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.WrapperBlur {
+  display: flex;
+  width: 100%;
+  opacity: 0.5;
+}
+
+.leftMenu {
+  width: 250px;
+  height: 100vh;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: "outfit", sans-serif;
+  user-select: none;
+  background-color: #1f2937;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  margin-left: 10px;
+}
+
+.logoImg {
+  max-width: 120px;
+  height: 60px;
+  color: #1f2937;
+}
+
+.logoName {
+  color: #fff;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  font-family: "poppins", sans-serif;
+  margin-left: 10px;
+  gap: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.items > li {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.selected{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.unSelected{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem;
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+.userName {
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: left;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  gap: 10px;
+  top: 300px;
+  font-size: 16px;
+  list-style: none;
+  color: #fff;
+}
+
+.logout {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  margin-bottom: 20px;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 10px;
+  top: 300px;
+  font-size: 16px;
+  list-style: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+/* .logout:hover {
+  padding: 0.5rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+  transition: all 0.3s ease-in-out;
+} */
+
+.rightMenu {
+  width: 100%;
+  font-family: "Outfit", sans-serif;
+  padding: 2rem;
+}
+
+.dasheading {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.expenseInput {
+  width: 300px;
+  height: 40px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  font-family: "Outfit", sans-serif;
+  outline: none;
+  background-color: #e5e7eb;
+}
+
+.dashtopdiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashdiv {
+  width: 80.5%;
+  height: 90vh;
+  margin: 0 auto;
+  border: 1px dotted lightgray;
+  position: absolute;
+  left: 250px;
+  top: 80px;
+}
+
+.expenseMaindiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px auto;
+}
+
+.expensesubdiv {
+  width: 30%;
+  height: 100px;
+  padding: 1rem;
+  border: 1px dotted black;
+  font-family: "poppins", sans-serif;
+  border-radius: 10px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0fff0;
+}
+
+.showAmount {
+  font-size: 36px;
+  font-weight: 500;
+  color: #1f2937;
+  font-family: "Outfit", sans-serif;
+}
+
+.balanceSummary {
+  font-size: 20px;
+  margin-top: 20px;
+  font-weight: 500;
+  color: #1f2937;
+  font-family: "outfit", sans-serif;
+}
+
+.balancesummarydiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 10px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.buttontabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85px;
+  height: 30px;
+  border: 1px dotted black;
+  border-radius: 5px;
+  background-color: #1f2937;
+  color: #fff;
+  padding-left: 1px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: "outfit", sans-serif;
+  cursor: pointer;
+}
+
+.expenseSection {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  margin-top: 2rem;
+}
+
+

@@ -1,0 +1,100 @@
+.leftMenu {
+  width: 250px;
+  height: 100vh;
+  font-size: 24px;
+  font-weight: 600;
+  font-family: "outfit", sans-serif;
+  user-select: none;
+  background-color: #1f2937;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  margin-left: 10px;
+}
+
+.logoImg {
+  max-width: 120px;
+  height: 60px;
+  color: #1f2937;
+}
+
+.logoName {
+  color: #fff;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  font-family: "poppins", sans-serif;
+  margin-left: 10px;
+  gap: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.items > li {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.selected{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.unSelected{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem;
+  background-color: #1f2937;
+  color: #e5e7eb;
+}
+
+.userName {
+  max-width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: left;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  gap: 10px;
+  top: 300px;
+  font-size: 16px;
+  list-style: none;
+  color: #fff;
+}
+
+.logout {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  margin-bottom: 20px;
+  align-items: center;
+  padding: 0.5rem;
+  gap: 10px;
+  top: 300px;
+  font-size: 16px;
+  list-style: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.5rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+/* .logout:hover {
+  padding: 0.5rem;
+  background-color: #e5e7eb;
+  color: #1f2937;
+  transition: all 0.3s ease-in-out;
+} */

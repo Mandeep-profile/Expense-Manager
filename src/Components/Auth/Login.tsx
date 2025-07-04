@@ -1,10 +1,53 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import personImg from "../../assets/Person__Image.png";
 import ExpansoLogo from "../../assets/Expanso_Logo.png";
 import { LoginFormData } from "../../Utils/JsonData";
 import { Link } from "react-router-dom";
-import styles from "./Auth.module.css"
+import styles from "./Auth.module.css";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const [loginAccountData, setLoginAccountData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginAccountData({
+      ...loginAccountData,
+      [e.target.name]: e.target.value.trim(),
+    });
+  };
+
+  const handleLoginAccount = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    const {email, password} = loginAccountData
+
+    if(!email || !password){
+      toast.error("All Fields are required")
+      return;
+    }
+    const users = JSON.parse(localStorage.getItem("expansoUsers") || "[]");
+
+    const matchedUser = users.find(
+      (user: any) =>
+        user.email.toLowerCase() === loginAccountData.email.toLowerCase() &&
+        user.password === loginAccountData.password
+    );
+
+    if (matchedUser) {
+      localStorage.setItem("isAuthenticated", "true")
+      localStorage.setItem("currentuser", JSON.stringify(matchedUser));
+      navigate("/dashboard");
+    } else {
+      toast.error("Invalid Credentials");
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.Expansodiv}>
@@ -36,11 +79,15 @@ const Login = () => {
                 type={field.type}
                 placeholder={field.placeholder}
                 id={field.id}
+                name={field.name}
                 autoComplete="off"
+                onChange={handleLoginChange}
               />
             </div>
           ))}
-          <button className={styles.button}>Login Account</button>
+          <button className={styles.button} onClick={handleLoginAccount}>
+            Login Account
+          </button>
           <p className={styles.account}>
             Don't have an account?{" "}
             <Link to="/" className={styles.link}>
@@ -50,7 +97,7 @@ const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

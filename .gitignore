@@ -11,8 +11,9 @@ node_modules
 dist
 dist-ssr
 *.local
-Dashboard/
-Loader/
+ProtectedRoute.tsx
+# Dashboard/
+# Loader/
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
