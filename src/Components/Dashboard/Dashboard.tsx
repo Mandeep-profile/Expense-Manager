@@ -1,9 +1,11 @@
 import { MonthsName } from "../../Utils/JsonData";
 import styles from "./Dashboard.module.css";
+import { tableData } from "../../Utils/JsonData";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import EditIcon from '@mui/icons-material/Edit';
 import DashboardSidebar from "./DashboardSidebar";
 
 const Dashboard = () => {
-
   return (
     <>
       <div className={styles.wrapper}>
@@ -44,7 +46,32 @@ const Dashboard = () => {
               <span className={styles.showAmount}>$ 4000</span>
             </div>
           </div>
-          <section className={styles.expenseSection}></section>
+          <section className={styles.expenseSec}>
+            <div className={styles.tableHeader}>
+              <ul className={styles.ullist}>
+                <li>Name</li>
+                <li>Category</li>
+                <li>Date</li>
+                <li>Amount</li>
+              </ul>
+            </div>
+
+            <div className={styles.scrollableRows}>
+              {tableData.map((field, index) => (
+                <div className={styles.listdiv} key={index}>
+                  <ul className={styles.ulist}>
+                    <li>{field.name}</li>
+                    <li>{field.category}</li>
+                    <li>{field.date}</li>
+                    <li className={styles.amountWithIcon}>
+                      {field.amount}
+                      <DeleteOutlineIcon className={styles.deleteIcon} />
+                    </li>
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </>

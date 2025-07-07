@@ -183,3 +183,27 @@ export const tableData = [
   }
 ]
 
+export const ExpenseFormData = [
+  {
+    label: "Name",
+    id: "Name",
+    name: "name",
+    type: "text",
+    placeholder: "John Doe",
+  },
+  {
+    label: "Date",
+    id: "date",
+    name: "date",
+    type: "date",
+    placeholder: "Select Date",
+  },
+  {
+    label: "Amount",
+    id: "amount",
+    name: "amount",
+    type: "text",
+    placeholder: "Enter Amount",
+  },
+];
+
