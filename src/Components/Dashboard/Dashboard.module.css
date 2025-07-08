@@ -185,6 +185,19 @@
   color: #dc2626;
 }
 
+.chartsection{
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.expenseDatasection{
+  width: 100%;
+  display: flex;
+}
+
 
 
 

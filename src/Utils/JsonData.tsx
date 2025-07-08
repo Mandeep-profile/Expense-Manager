@@ -116,72 +116,72 @@ export const MonthsName = [
 
 export const tableData = [
   {
-    "name": "Lunch",
-    "category": "Food",
-    "date": "2025-07-02",
-    "amount": 250
+    name: "Groceries",
+    category: "Food",
+    date: "2025-07-01",
+    amount: 1200,
   },
   {
-    "name": "Groceries",
-    "category": "Food",
-    "date": "2025-07-01",
-    "amount": 1200
+    name: "Snacks",
+    category: "Food",
+    date: "2025-06-29",
+    amount: 150,
   },
   {
-    "name": "Snacks",
-    "category": "Food",
-    "date": "2025-06-29",
-    "amount": 150
+    name: "Metro Card",
+    category: "Transport",
+    date: "2025-07-01",
+    amount: 100,
   },
   {
-    "name": "Metro Card",
-    "category": "Transport",
-    "date": "2025-07-01",
-    "amount": 100
+    name: "Uber Ride",
+    category: "Transport",
+    date: "2025-06-30",
+    amount: 300,
   },
   {
-    "name": "Uber Ride",
-    "category": "Transport",
-    "date": "2025-06-30",
-    "amount": 300
+    name: "Maintenance Fee",
+    category: "Rent",
+    date: "2025-06-30",
+    amount: 500,
   },
   {
-    "name": "Fuel",
-    "category": "Transport",
-    "date": "2025-06-28",
-    "amount": 600
+    name: "Online Shopping",
+    category: "Shopping",
+    date: "2025-06-30",
+    amount: 150,
   },
   {
-    "name": "Monthly Rent",
-    "category": "Rent",
-    "date": "2025-07-01",
-    "amount": 12000
+    name: "Clothing",
+    category: "Shopping",
+    date: "2025-06-28",
+    amount: 200,
   },
   {
-    "name": "Maintenance Fee",
-    "category": "Rent",
-    "date": "2025-06-30",
-    "amount": 500
+    name: "Gadgets",
+    category: "Shopping",
+    date: "2025-06-27",
+    amount: 3500,
   },
-  {
-    "name": "Online Shopping",
-    "category": "Shopping",
-    "date": "2025-06-30",
-    "amount": 1500
+   {
+    name: "Gadgets",
+    category: "Travel",
+    date: "2025-06-27",
+    amount: 3500,
   },
-  {
-    "name": "Clothing",
-    "category": "Shopping",
-    "date": "2025-06-28",
-    "amount": 2000
+    {
+    name: "Gadgets",
+    category: "Office",
+    date: "2025-06-27",
+    amount: 3500,
   },
-  {
-    "name": "Gadgets",
-    "category": "Shopping",
-    "date": "2025-06-27",
-    "amount": 3500
-  }
-]
+    {
+    name: "Gadgets",
+    category: "Cab",
+    date: "2025-06-27",
+    amount: 3500,
+  },
+];
 
 export const ExpenseFormData = [
   {
@@ -206,4 +206,3 @@ export const ExpenseFormData = [
     placeholder: "Enter Amount",
   },
 ];
-

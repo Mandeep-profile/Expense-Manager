@@ -2,7 +2,7 @@ import { MonthsName } from "../../Utils/JsonData";
 import styles from "./Dashboard.module.css";
 import { tableData } from "../../Utils/JsonData";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import EditIcon from '@mui/icons-material/Edit';
+import ExpenChart from "../Chart/ExpenseChart"
 import DashboardSidebar from "./DashboardSidebar";
 
 const Dashboard = () => {
@@ -46,6 +46,7 @@ const Dashboard = () => {
               <span className={styles.showAmount}>$ 4000</span>
             </div>
           </div>
+          <section className={styles.expenseDatasection}>
           <section className={styles.expenseSec}>
             <div className={styles.tableHeader}>
               <ul className={styles.ullist}>
@@ -71,6 +72,10 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
+          </section>
+          <section className={styles.chartsection}>
+             <ExpenChart />
+          </section>
           </section>
         </div>
       </div>
