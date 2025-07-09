@@ -1,11 +1,25 @@
+import { useState, useEffect } from "react";
 import { MonthsName } from "../../Utils/JsonData";
 import styles from "./Dashboard.module.css";
-import { tableData } from "../../Utils/JsonData";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import ExpenChart from "../Chart/ExpenseChart"
+import ExpenChart from "../Chart/ExpenseChart";
 import DashboardSidebar from "./DashboardSidebar";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteExpense } from "../AddExpense/ExpenseSlice";
 
 const Dashboard = () => {
+
+  const expenses = useSelector((state) => state.expense.expensesList);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    localStorage.setItem("userExpenses", JSON.stringify(expenses));
+  }, [expenses]);
+
+  const handleDeleteExpenseData = (id:number) => {
+    dispatch(deleteExpense(id));
+  };
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -47,35 +61,38 @@ const Dashboard = () => {
             </div>
           </div>
           <section className={styles.expenseDatasection}>
-          <section className={styles.expenseSec}>
-            <div className={styles.tableHeader}>
-              <ul className={styles.ullist}>
-                <li>Name</li>
-                <li>Category</li>
-                <li>Date</li>
-                <li>Amount</li>
-              </ul>
-            </div>
+            <section className={styles.expenseSec}>
+              <div className={styles.tableHeader}>
+                <ul className={styles.ullist}>
+                  <li>Name</li>
+                  <li>Category</li>
+                  <li>Date</li>
+                  <li>Amount</li>
+                </ul>
+              </div>
 
-            <div className={styles.scrollableRows}>
-              {tableData.map((field, index) => (
-                <div className={styles.listdiv} key={index}>
-                  <ul className={styles.ulist}>
-                    <li>{field.name}</li>
-                    <li>{field.category}</li>
-                    <li>{field.date}</li>
-                    <li className={styles.amountWithIcon}>
-                      {field.amount}
-                      <DeleteOutlineIcon className={styles.deleteIcon} />
-                    </li>
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </section>
-          <section className={styles.chartsection}>
-             <ExpenChart />
-          </section>
+              {expenses.length > 0 ? <div className={styles.scrollableRows}>
+                {expenses.map((field) => (
+                  <div className={styles.listdiv} key={field.id}>
+                    <ul className={styles.ulist}>
+                      <li>{field.name}</li>
+                      <li>{field.category}</li>
+                      <li>{field.date}</li>
+                      <li className={styles.amountWithIcon}>
+                        {field.amount}
+                        <DeleteOutlineIcon
+                          className={styles.deleteIcon}
+                          onClick={() => handleDeleteExpenseData(field.id)}
+                        />
+                      </li>
+                    </ul>
+                  </div>
+                ))}
+              </div> : <h1 className={styles.noExpense}>No Expense Added</h1>}
+            </section>
+            <section className={styles.chartsection}>
+              <ExpenChart />
+            </section>
           </section>
         </div>
       </div>

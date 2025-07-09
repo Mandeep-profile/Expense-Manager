@@ -11,7 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
-# AddExpense/
+TagInput.tsx
+TagInput.module.css
 # Dashboard/
 # Loader/
 # Editor directories and files
