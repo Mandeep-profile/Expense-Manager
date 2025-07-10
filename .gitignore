@@ -13,6 +13,8 @@ dist-ssr
 *.local
 TagInput.tsx
 TagInput.module.css
+ExpenseChart.tsx
+# Chart/
 # Dashboard/
 # Loader/
 # Editor directories and files

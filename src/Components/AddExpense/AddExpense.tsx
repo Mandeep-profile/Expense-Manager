@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./AddExpense.module.css";
 import { addExpense } from "./ExpenseSlice";
+import { toast } from "react-toastify";
 // import TagInput from "./TagInput";
 
 const AddExpense = () => {
@@ -14,7 +15,7 @@ const AddExpense = () => {
 
   const dispatch = useDispatch();
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -25,16 +26,26 @@ const AddExpense = () => {
     e.preventDefault();
     dispatch(
       addExpense({
-         id: Date.now(),
-        ...formData,
+        id: Date.now(),
+        name: formData.name,
+        category: formData.category,
+        date: formData.date,
+        amount: formData.amount,
       })
     );
+    setFormData({
+      name: "",
+      amount: "",
+      category: "",
+      date: "",
+    });
+    toast.success("New Expense Added")
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.flexContainer}>
-        <div className={styles.formSection}>
+        <form className={styles.formSection} onSubmit={handleExpenseFormSubmit}>
           <h2 className={styles.formHeading}>Add Expense</h2>
           {/* <TagInput /> */}
           <label htmlFor="category" className={styles.label}>
@@ -97,10 +108,10 @@ const AddExpense = () => {
               onChange={handleFormChange}
             />
           </div>
-          <button className={styles.button} onClick={handleExpenseFormSubmit}>
+          <button className={styles.button}>
             Add Expense
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

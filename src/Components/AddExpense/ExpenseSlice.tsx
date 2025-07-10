@@ -12,7 +12,7 @@ interface ExpenseState {
   expensesList: ExpenseItem[];
 }
 
-export const savedItems = localStorage.getItem("userExpenses");
+const savedItems = localStorage.getItem("userExpenses");
 const parsedItems: ExpenseItem[] = savedItems ? JSON.parse(savedItems) : [];
 
 const initialState: ExpenseState = {
