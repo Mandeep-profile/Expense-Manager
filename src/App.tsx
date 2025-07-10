@@ -8,12 +8,17 @@ import PageLayout from "./Components/Loader/PageLayout";
 import AddExpense from "./Components/AddExpense/AddExpense";
 import Report from "./Components/Report/Report";
 import Settings from "./Components/Settings/Settings";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ViewInsights from "./Components/Chart/ViewInsights";
 
-function App() {
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+function AnimatedRoutes() {
+  const location = useLocation();
+
   return (
-    <Router>
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Signup />} />
         <Route
           path="/login"
@@ -26,11 +31,9 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <PageLayout>
               <ProtectedRoute>
                 <Dashboard />
               </ProtectedRoute>
-            </PageLayout>
           }
         />
         <Route element={<Layout />}>
@@ -38,8 +41,17 @@ function App() {
           <Route path="/addexpense" element={<AddExpense />} />
           <Route path="/report" element={<Report />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/ViewInsights" element={<ViewInsights />} />
         </Route>
       </Routes>
+    </AnimatePresence>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <AnimatedRoutes />
     </Router>
   );
 }

@@ -15,7 +15,7 @@ const AddExpense = () => {
 
   const dispatch = useDispatch();
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleFormChange = (e: React.FormEvent<HTMLFormElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -24,6 +24,13 @@ const AddExpense = () => {
 
   const handleExpenseFormSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    const {name, category, date, amount} = formData
+
+    if(!name || !category || !date || !amount){
+      toast.error("All Fields are required");
+      return;
+    }
+
     dispatch(
       addExpense({
         id: Date.now(),

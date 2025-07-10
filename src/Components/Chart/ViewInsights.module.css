@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  font-family: "Outfit", sans-serif;
+  min-height: 100vh;
+}
+
+.chartCard {
+  background-color: white;
+  border-radius: 16px;
+}
+
+.chartTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+  text-align: left;
+}

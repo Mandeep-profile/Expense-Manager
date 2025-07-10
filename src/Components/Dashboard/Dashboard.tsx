@@ -6,11 +6,13 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 import DashboardSidebar from "./DashboardSidebar";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteExpense } from "../AddExpense/ExpenseSlice";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const expenses = useSelector((state) => state.expense.expensesList);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   useEffect(() => {
     localStorage.setItem("userExpenses", JSON.stringify(expenses));
@@ -20,6 +22,10 @@ const Dashboard = () => {
     dispatch(deleteExpense(id));
     toast.info("Expense Deleted");
   };
+
+  const handleViewInsights = () => {
+    navigate("/ViewInsights")
+  }
 
   return (
     <>
@@ -69,6 +75,7 @@ const Dashboard = () => {
             <div className={styles.insightsButtonContainer}>
               <button
                 className={styles.insightsButton}
+                onClick={handleViewInsights}
               >
                View Insights
               </button>
