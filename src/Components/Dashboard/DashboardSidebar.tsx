@@ -1,79 +1,164 @@
-import PersonIcon from "@mui/icons-material/Person";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
-import AddCardOutlinedIcon from "@mui/icons-material/AddCardOutlined";
-import SummarizeOutlinedIcon from "@mui/icons-material/SummarizeOutlined";
-import SettingsSuggestOutlinedIcon from "@mui/icons-material/SettingsSuggestOutlined";
-import ExpansoLogo from "../../assets/Expanso_Logo.png";
-import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
-import styles from "./DashboardSidebar.module.css";
+import React, { useState } from 'react';
+import { useNavigate, NavLink } from 'react-router-dom';
+import {
+  GridViewOutlined,
+  AddCardOutlined,
+  SummarizeOutlined,
+  SettingsOutlined,
+  PersonOutlined,
+  LogoutOutlined,
+  CreditCard,
+  MenuOutlined,
+  CloseOutlined,
+  ChevronLeftOutlined,
+  ChevronRightOutlined
+} from '@mui/icons-material';
+import styles from './DashboardSidebar.module.css';
 
-const DashboardSidebar = () => {
+const DashboardSidebar: React.FC = () => {
   const navigate = useNavigate();
-  const handleLogOut = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  const handleLogout = () => {
     localStorage.setItem("isAuthenticated", "false");
     localStorage.removeItem("currentuser");
     navigate("/login");
   };
 
-  const user = JSON.parse(localStorage.getItem("currentuser") || "{}");
+  const user = JSON.parse(localStorage.getItem("currentuser") || '{"name": "User"}');
+
+  const menuItems = [
+    {
+      path: '/dashboard',
+      icon: <GridViewOutlined />,
+      label: 'Dashboard',
+      description: 'Overview & Analytics'
+    },
+    {
+      path: '/addexpense',
+      icon: <AddCardOutlined />,
+      label: 'Add Expense',
+      description: 'Record new expenses'
+    },
+    {
+      path: '/report',
+      icon: <SummarizeOutlined />,
+      label: 'Reports',
+      description: 'Financial insights'
+    },
+    {
+      path: '/settings',
+      icon: <SettingsOutlined />,
+      label: 'Settings',
+      description: 'Account preferences'
+    }
+  ];
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed);
+  };
+
+  const toggleMobile = () => {
+    setIsMobileOpen(!isMobileOpen);
+  };
+
+  const closeMobile = () => {
+    setIsMobileOpen(false);
+  };
 
   return (
-    <div className={styles.leftMenu}>
-      <div className={styles.logo}>
-        <img src={ExpansoLogo} className={styles.logoImg} />
-        <span className={styles.logoName}>Expanso</span>
-      </div>
-      <div>
-        <ul className={styles.items}>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) =>
-              isActive ? styles.selected : styles.unSelected
-            }
-          >
-            <GridViewOutlinedIcon />
-            Dashboard
-          </NavLink>
-          <NavLink
-            to="/addexpense"
-            className={({ isActive }) =>
-              isActive ? styles.selected : styles.unSelected
-            }
-          >
-            <AddCardOutlinedIcon />
-            Add Expense
-          </NavLink>
-          <NavLink
-            to="/report"
-            className={({ isActive }) =>
-              isActive ? styles.selected : styles.unSelected
-            }
-          >
-            <SummarizeOutlinedIcon />
-            Report
-          </NavLink>
+    <>
+      <button className={styles.mobileMenuButton} onClick={toggleMobile}>
+        <MenuOutlined />
+      </button>
 
-          <NavLink
-            to="/settings"
-            className={({ isActive }) =>
-              isActive ? styles.selected : styles.unSelected
-            }
+      {isMobileOpen && (
+        <div className={styles.mobileBackdrop} onClick={closeMobile}></div>
+      )}
+
+      <div className={`${styles.sidebar} ${isCollapsed ? styles.collapsed : ''} ${isMobileOpen ? styles.mobileOpen : ''}`}>
+  
+        <div className={styles.backgroundElements}>
+          <div className={styles.floatingElement1}></div>
+          <div className={styles.floatingElement2}></div>
+          <div className={styles.floatingElement3}></div>
+        </div>
+
+        <div className={styles.header}>
+          <div className={styles.logo}>
+            <div className={styles.logoIcon}>
+              <CreditCard />
+            </div>
+            {!isCollapsed && (
+              <div className={styles.logoText}>
+                <span className={styles.logoName}>Expanso</span>
+                <span className={styles.logoTagline}>Expense Manager</span>
+              </div>
+            )}
+          </div>
+
+          <button 
+            className={styles.collapseButton} 
+            onClick={toggleCollapse}
+            aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
-            <SettingsSuggestOutlinedIcon />
-            Settings
-          </NavLink>
-        </ul>
+            {isCollapsed ? <ChevronRightOutlined /> : <ChevronLeftOutlined />}
+          </button>
+
+          <button className={styles.mobileCloseButton} onClick={closeMobile}>
+            <CloseOutlined />
+          </button>
+        </div>
+
+        <nav className={styles.navigation}>
+          <ul className={styles.menuList}>
+            {menuItems.map((item) => (
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) => 
+                    `${styles.menuItem} ${isActive ? styles.active : ''}`
+                  }
+                  onClick={closeMobile}
+                >
+                  <span className={styles.menuIcon}>{item.icon}</span>
+                  {!isCollapsed && (
+                    <div className={styles.menuContent}>
+                      <span className={styles.menuLabel}>{item.label}</span>
+                      <span className={styles.menuDescription}>{item.description}</span>
+                    </div>
+                  )}
+                  <div className={styles.activeIndicator}></div>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className={styles.userSection}>
+          <div className={styles.userInfo}>
+            <div className={styles.userAvatar}>
+              <PersonOutlined />
+            </div>
+            {!isCollapsed && (
+              <div className={styles.userDetails}>
+                <span className={styles.userName}>{user.name}</span>
+              </div>
+            )}
+          </div>
+          
+          <button 
+            className={styles.logoutButton} 
+            onClick={handleLogout}
+            title="Logout"
+          >
+            <LogoutOutlined />
+            {!isCollapsed && <span>Logout</span>}
+          </button>
+        </div>
       </div>
-      <div className={styles.userName}>
-        <PersonIcon /> {user.name}
-      </div>
-      <div className={styles.logout} onClick={handleLogOut}>
-        <LogoutOutlinedIcon />
-        Logout
-      </div>
-    </div>
+    </>
   );
 };
 

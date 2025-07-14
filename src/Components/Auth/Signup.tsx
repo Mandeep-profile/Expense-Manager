@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import { FormData } from "../../Utils/JsonData";
 import personImg from "../../assets/Person__Image.png";
-import ExpansoLogo from "../../assets/Expanso_Logo.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import MainImage from "../../assets/MainImage.png";
 import { toast } from "react-toastify";
+import { CreditCard, User, Mail, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from "lucide-react";
 import styles from "./Auth.module.css";
 
 const Signup = () => {
   const [showImage, setShowImage] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [accountData, setAccountData] = useState({
     name: "",
     email: "",
@@ -19,20 +20,22 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    const fadeTimer = setTimeout(() => {
-      setFadeOut(true);
-    }, 2000);
+    if (location.pathname === "/") {
+      const fadeTimer = setTimeout(() => setFadeOut(true), 2000);
+      const hideTimer = setTimeout(() => setShowImage(false), 3000);
 
-    const hideTimer = setTimeout(() => {
+      return () => {
+        clearTimeout(fadeTimer);
+        clearTimeout(hideTimer);
+      };
+    } else if (location.pathname === "/login") {
       setShowImage(false);
-    }, 3000);
-
-    return () => {
-      clearTimeout(fadeTimer);
-      clearTimeout(hideTimer);
-    };
+    } else {
+      setShowImage(false);
+    }
   }, []);
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,76 +67,199 @@ const Signup = () => {
     );
 
     if (userExist) {
-      toast.info("User already exist with this email");
+      toast.info("User already exists with this email");
       return;
     }
 
     const newUser = { name, email, password, cpassword };
-    const updatedUser = [...users, newUser];
+    const updatedUsers = [...users, newUser];
 
-    localStorage.setItem("expansoUsers", JSON.stringify(updatedUser));
-    setTimeout(() => {
-      toast.success("Account Created Succesfully");
-    }, 1500);
+    localStorage.setItem("expansoUsers", JSON.stringify(updatedUsers));
+    toast.success("Account Created Successfully");
     navigate("/login");
+  };
+
+  const isValidEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const isPasswordStrong = (password: string) => {
+    return password.length >= 8 && /[A-Z]/.test(password) && /[0-9]/.test(password);
+  };
+
+  const passwordsMatch = accountData.password === accountData.cpassword && accountData.cpassword !== '';
+
+  const getFieldIcon = (fieldName: string) => {
+    switch(fieldName) {
+      case 'name': return <User size={20} />;
+      case 'email': return <Mail size={20} />;
+      case 'password':
+      case 'cpassword': return <Lock size={20} />;
+      default: return null;
+    }
   };
 
   return (
     <>
-      {showImage ? (
+      {showImage && location.pathname === "/" ? (
         <div className={styles.imageContainer}>
           <img
             src={MainImage}
-            alt="Main Image"
+            alt="Main Splash"
             className={`${styles.MainImg} ${fadeOut ? styles.slideUpOut : ""}`}
           />
         </div>
       ) : (
         <div className={styles.wrapper}>
-          <div className={styles.Expansodiv}>
-            <img
-              className={styles.Expansoimage}
-              src={ExpansoLogo}
-              alt="Expanso App Logo"
-            />
-            <span className={styles.logoText}>Expanso</span>
+          {/* Floating Background Elements */}
+          <div className={styles.backgroundElements}>
+            <div className={styles.floatingElement}></div>
+            <div className={styles.floatingElement}></div>
+            <div className={styles.floatingElement}></div>
           </div>
-          <div className={styles.tagline}>Manage Expenses Effortlessly</div>
+
+          {/* Logo Section */}
+          <div className={styles.logoSection}>
+            <div className={styles.Expansodiv}>
+              <div className={styles.logoIconContainer}>
+                <CreditCard size={24} />
+              </div>
+              <div>
+                <span className={styles.logoText}>Expanso</span>
+                <div className={styles.tagline}>Manage Expenses Effortlessly</div>
+              </div>
+            </div>
+          </div>
 
           <div className={styles.flexContainer}>
-            <img
-              className={styles.Personimage}
-              src={personImg}
-              alt="Person Image"
-            />
-
-            <div className={styles.formSection}>
-              <h2 className={styles.formHeading}>Create Account</h2>
-              {FormData.map((field) => (
-                <div key={field.id} className={styles.inputGroup}>
-                  <label htmlFor={field.id} className={styles.label}>
-                    {field.label}
-                  </label>
-                  <input
-                    className={styles.input}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    id={field.id}
-                    name={field.name}
-                    autoComplete="off"
-                    onChange={handleAccountChange}
-                  />
+            {/* Left Section - Illustration */}
+            <div className={styles.leftSection}>
+              <div className={styles.illustrationContainer}>
+                <img
+                  className={styles.Personimage}
+                  src={personImg}
+                  alt="Person Illustration"
+                />
+                <div className={styles.illustrationOverlay}>
+                  <h3>Join Other users</h3>
+                  <p>Managing their finances smarter with Expanso</p>
                 </div>
-              ))}
-              <button className={styles.button} onClick={handleCreateAccount}>
-                Create Account
-              </button>
-              <p className={styles.account}>
-                Already have an account?{" "}
-                <Link to="/login" className={styles.link}>
-                  Sign in
-                </Link>
-              </p>
+              </div>
+            </div>
+
+            {/* Right Section - Form */}
+            <div className={styles.rightSection}>
+              <div className={styles.formContainer}>
+                <div className={styles.formHeader}>
+                  <h2 className={styles.formHeading}>Create Account</h2>
+                  <p className={styles.formSubtitle}>Start your financial journey today</p>
+                </div>
+
+                <form onSubmit={handleCreateAccount} className={styles.form}>
+                  {FormData.map((field) => (
+                    <div key={field.id} className={styles.inputGroup}>
+                      <label htmlFor={field.id} className={styles.label}>
+                        {getFieldIcon(field.name)}
+                        {field.label}
+                      </label>
+                      <div className={styles.inputContainer}>
+                        <input
+                          className={styles.input}
+                          type={
+                            field.name === 'password' && showPassword ? 'text' :
+                            field.name === 'cpassword' && showConfirmPassword ? 'text' :
+                            field.type
+                          }
+                          placeholder={field.placeholder}
+                          id={field.id}
+                          name={field.name}
+                          value={accountData[field.name as keyof typeof accountData]}
+                          autoComplete="off"
+                          onChange={handleAccountChange}
+                          required
+                        />
+                        {(field.name === 'password' || field.name === 'cpassword') && (
+                          <button
+                            type="button"
+                            className={styles.passwordToggle}
+                            onClick={() => {
+                              if (field.name === 'password') {
+                                setShowPassword(!showPassword);
+                              } else {
+                                setShowConfirmPassword(!showConfirmPassword);
+                              }
+                            }}
+                          >
+                            {(field.name === 'password' ? showPassword : showConfirmPassword) ? 
+                              <EyeOff size={20} /> : <Eye size={20} />
+                            }
+                          </button>
+                        )}
+                      </div>
+                      
+                      {/* Validation Messages */}
+                      {field.name === 'email' && accountData.email && (
+                        <div className={`${styles.validationMessage} ${isValidEmail(accountData.email) ? styles.success : styles.error}`}>
+                          {isValidEmail(accountData.email) ? (
+                            <>
+                              <CheckCircle size={14} />
+                              Valid email address
+                            </>
+                          ) : (
+                            <>
+                              <AlertCircle size={14} />
+                              Please enter a valid email address
+                            </>
+                          )}
+                        </div>
+                      )}
+                      
+                      {field.name === 'password' && accountData.password && (
+                        <div className={`${styles.validationMessage} ${isPasswordStrong(accountData.password) ? styles.success : styles.error}`}>
+                          {isPasswordStrong(accountData.password) ? (
+                            <>
+                              <CheckCircle size={14} />
+                              Strong password
+                            </>
+                          ) : (
+                            <>
+                              <AlertCircle size={14} />
+                              Password must be 8+ chars with uppercase and number
+                            </>
+                          )}
+                        </div>
+                      )}
+                      
+                      {field.name === 'cpassword' && accountData.cpassword && (
+                        <div className={`${styles.validationMessage} ${passwordsMatch ? styles.success : styles.error}`}>
+                          {passwordsMatch ? (
+                            <>
+                              <CheckCircle size={14} />
+                              Passwords match
+                            </>
+                          ) : (
+                            <>
+                              <AlertCircle size={14} />
+                              Passwords do not match
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                  
+                  <button type="submit" className={styles.button}>
+                    Create Account
+                  </button>
+                </form>
+
+                <p className={styles.account}>
+                  Already have an account?{" "}
+                  <Link to="/login" className={styles.link}>
+                    Sign in
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -9,8 +9,13 @@ import AddExpense from "./Components/AddExpense/AddExpense";
 import Report from "./Components/Report/Report";
 import Settings from "./Components/Settings/Settings";
 import ViewInsights from "./Components/Chart/ViewInsights";
-
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import UserSetup from "./Components/User_Setup/UserSetup";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 function AnimatedRoutes() {
@@ -31,11 +36,12 @@ function AnimatedRoutes() {
         <Route
           path="/dashboard"
           element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
           }
         />
+        <Route path="/setup" element={<UserSetup />} />
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/addexpense" element={<AddExpense />} />

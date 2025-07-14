@@ -1,0 +1,77 @@
+.wrapper {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.formCard {
+  max-width: 500px;
+  width: 100%;
+  border-radius: 1.25rem;
+  background-color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  font-family: "Outfit", sans-serif;
+}
+
+.inputGroup label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.inputGroup input,
+.inputGroup select {
+  height: 45px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  color: #1f2937;
+  font-family: "Outfit", sans-serif;
+  background-color: #ffffff;
+  transition: border 0.3s ease;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background-color: #fefefe;
+}
+
+.submitButton {
+  width: 100%;
+  height: 48px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #1f2937;
+  border: none;
+  border-radius: 8px;
+  font-family: "Outfit", sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+  background-color: #374151;
+}
