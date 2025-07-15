@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FormData } from "../../Utils/JsonData";
 import personImg from "../../assets/Person__Image.png";
+import ExpansoLogo from "../../assets/Expanso_Logo.png"
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import MainImage from "../../assets/MainImage.png";
 import { toast } from "react-toastify";
 import { CreditCard, User, Mail, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from "lucide-react";
 import styles from "./Auth.module.css";
 
 const Signup = () => {
-  const [showImage, setShowImage] = useState(true);
-  const [fadeOut, setFadeOut] = useState(false);
+  // const [showImage, setShowImage] = useState(true);
+  // const [fadeOut, setFadeOut] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [accountData, setAccountData] = useState({
@@ -22,21 +22,21 @@ const Signup = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    if (location.pathname === "/") {
-      const fadeTimer = setTimeout(() => setFadeOut(true), 2000);
-      const hideTimer = setTimeout(() => setShowImage(false), 3000);
+  // useEffect(() => {
+  //   if (location.pathname === "/") {
+  //     const fadeTimer = setTimeout(() => setFadeOut(true), 2000);
+  //     const hideTimer = setTimeout(() => setShowImage(false), 3000);
 
-      return () => {
-        clearTimeout(fadeTimer);
-        clearTimeout(hideTimer);
-      };
-    } else if (location.pathname === "/login") {
-      setShowImage(false);
-    } else {
-      setShowImage(false);
-    }
-  }, []);
+  //     return () => {
+  //       clearTimeout(fadeTimer);
+  //       clearTimeout(hideTimer);
+  //     };
+  //   } else if (location.pathname === "/login") {
+  //     setShowImage(false);
+  //   } else {
+  //     setShowImage(false);
+  //   }
+  // }, []);
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccountData({
@@ -101,28 +101,17 @@ const Signup = () => {
 
   return (
     <>
-      {showImage && location.pathname === "/" ? (
-        <div className={styles.imageContainer}>
-          <img
-            src={MainImage}
-            alt="Main Splash"
-            className={`${styles.MainImg} ${fadeOut ? styles.slideUpOut : ""}`}
-          />
-        </div>
-      ) : (
         <div className={styles.wrapper}>
-          {/* Floating Background Elements */}
           <div className={styles.backgroundElements}>
             <div className={styles.floatingElement}></div>
             <div className={styles.floatingElement}></div>
             <div className={styles.floatingElement}></div>
           </div>
 
-          {/* Logo Section */}
           <div className={styles.logoSection}>
             <div className={styles.Expansodiv}>
               <div className={styles.logoIconContainer}>
-                <CreditCard size={24} />
+                <img src={ExpansoLogo} alt="Expanso Logo" className={styles.expansologo}/>
               </div>
               <div>
                 <span className={styles.logoText}>Expanso</span>
@@ -132,7 +121,6 @@ const Signup = () => {
           </div>
 
           <div className={styles.flexContainer}>
-            {/* Left Section - Illustration */}
             <div className={styles.leftSection}>
               <div className={styles.illustrationContainer}>
                 <img
@@ -263,7 +251,6 @@ const Signup = () => {
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };

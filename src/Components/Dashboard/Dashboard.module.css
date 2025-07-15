@@ -6,6 +6,7 @@
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   min-height: 100vh;
   overflow-y: scroll;
+    font-family: "Outfit", sans-serif;
 }
 
 .rightMenu {
@@ -401,8 +402,8 @@
   font-size: 14px;
   color: #64748b;
   background: rgba(241, 245, 249, 0.8);
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .expenseTableHeader {
@@ -480,11 +481,13 @@
 }
 
 .categoryBadge {
+  min-width: 120px;
+  text-align: center;
   background: rgba(59, 130, 246, 0.1);
   color: #3b82f6;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -567,7 +570,7 @@
 @media (max-width: 1024px) {
   .rightMenu {
     width: 100%;
-    padding: 1rem;
+    padding: 4rem 1rem;
   }
   
   .dashtopdiv {

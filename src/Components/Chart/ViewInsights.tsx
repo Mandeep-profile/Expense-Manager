@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import styles from "./ViewInsights.module.css";
 import { useSelector } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 interface ExpenseItem {
   name: string;
   category: string;
@@ -56,6 +56,7 @@ const CATEGORY_ICONS: Record<string, string> = {
 
 const ViewInsights = () => {
   const expenses = useSelector((state: RootState) => state.expense.expensesList);
+  const navigate = useNavigate()
 
   const barChartData = MONTHS.map((month) => {
     const monthlyExpenses = expenses.filter((item) => {
@@ -112,6 +113,10 @@ const ViewInsights = () => {
     return null;
   };
 
+  const handleBackToDashboard = () => {
+    navigate("/dashboard")
+  }
+
   return (
     <motion.div
       className={styles.container}
@@ -120,7 +125,6 @@ const ViewInsights = () => {
       exit={{ x: "100%", opacity: 0 }}
       transition={{ duration: 0.8, ease: "easeInOut" }}
     >
-      {/* Header Section */}
       <div className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.headerIcon}>
@@ -131,9 +135,9 @@ const ViewInsights = () => {
             <p className={styles.pageSubtitle}>Comprehensive analysis of your spending patterns</p>
           </div>
         </div>
-        <div className={styles.dateRange}>
+        <div className={styles.dateRange} onClick={handleBackToDashboard}>
           <Calendar size={16} />
-          <span>Last 12 months</span>
+          <div className={styles.backbtn}>Back to Dashboard</div>
         </div>
       </div>
 
@@ -181,7 +185,6 @@ const ViewInsights = () => {
         </motion.div>
       </div>
 
-      {/* Charts Section */}
       <div className={styles.chartsGrid}>
         {/* Bar Chart */}
         <motion.div 

@@ -13,7 +13,8 @@ dist-ssr
 *.local
 TagInput.tsx
 TagInput.module.css
-src/Components/chart/
+UserSetup.tsx
+UserSetup.module.css
 .vscode/*
 !.vscode/extensions.json
 .idea

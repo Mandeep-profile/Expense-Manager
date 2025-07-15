@@ -1,30 +1,22 @@
 import React, { useState } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
   GridViewOutlined,
   AddCardOutlined,
   SummarizeOutlined,
   SettingsOutlined,
   PersonOutlined,
-  LogoutOutlined,
-  CreditCard,
   MenuOutlined,
   CloseOutlined,
   ChevronLeftOutlined,
   ChevronRightOutlined
 } from '@mui/icons-material';
+import ExpansoLogo from "../../assets/Expanso_Logo.png"
 import styles from './DashboardSidebar.module.css';
 
 const DashboardSidebar: React.FC = () => {
-  const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-
-  const handleLogout = () => {
-    localStorage.setItem("isAuthenticated", "false");
-    localStorage.removeItem("currentuser");
-    navigate("/login");
-  };
 
   const user = JSON.parse(localStorage.getItem("currentuser") || '{"name": "User"}');
 
@@ -69,9 +61,9 @@ const DashboardSidebar: React.FC = () => {
 
   return (
     <>
-      <button className={styles.mobileMenuButton} onClick={toggleMobile}>
+      {!isMobileOpen ? <button className={styles.mobileMenuButton} onClick={toggleMobile}>
         <MenuOutlined />
-      </button>
+      </button> : " "}
 
       {isMobileOpen && (
         <div className={styles.mobileBackdrop} onClick={closeMobile}></div>
@@ -88,7 +80,7 @@ const DashboardSidebar: React.FC = () => {
         <div className={styles.header}>
           <div className={styles.logo}>
             <div className={styles.logoIcon}>
-              <CreditCard />
+               <img src={ExpansoLogo} alt="Expanso Logo" className={styles.expansologo}/>
             </div>
             {!isCollapsed && (
               <div className={styles.logoText}>
@@ -100,7 +92,7 @@ const DashboardSidebar: React.FC = () => {
 
           <button 
             className={styles.collapseButton} 
-            onClick={toggleCollapse}
+            // onClick={toggleCollapse}
             aria-label={isCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           >
             {isCollapsed ? <ChevronRightOutlined /> : <ChevronLeftOutlined />}
@@ -148,14 +140,14 @@ const DashboardSidebar: React.FC = () => {
             )}
           </div>
           
-          <button 
+          {/* <button 
             className={styles.logoutButton} 
             onClick={handleLogout}
             title="Logout"
           >
             <LogoutOutlined />
             {!isCollapsed && <span>Logout</span>}
-          </button>
+          </button> */}
         </div>
       </div>
     </>

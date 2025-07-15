@@ -48,6 +48,7 @@ function AnimatedRoutes() {
           <Route path="/report" element={<Report />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/ViewInsights" element={<ViewInsights />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
     </AnimatePresence>

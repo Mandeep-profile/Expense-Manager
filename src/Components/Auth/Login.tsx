@@ -1,11 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ExpansoLogo from "../../assets/Expanso_Logo.png"
 import personImg from "../../assets/Person__Image.png";
 import { LoginFormData } from "../../Utils/JsonData";
 import { Link } from "react-router-dom";
 import styles from "./Auth.module.css";
 import { toast } from "react-toastify";
-import { CreditCard, Mail, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  CheckCircle,
+  AlertCircle,
+} from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -56,9 +64,12 @@ const Login = () => {
 
   const getFieldIcon = (fieldName: string) => {
     switch (fieldName) {
-      case 'email': return <Mail size={20} />;
-      case 'password': return <Lock size={20} />;
-      default: return null;
+      case "email":
+        return <Mail size={20} />;
+      case "password":
+        return <Lock size={20} />;
+      default:
+        return null;
     }
   };
 
@@ -75,7 +86,11 @@ const Login = () => {
       <div className={styles.logoSection}>
         <div className={styles.Expansodiv}>
           <div className={styles.logoIconContainer}>
-            <CreditCard size={24} />
+            <img
+              src={ExpansoLogo}
+              alt="Expanso Logo"
+              className={styles.expansologo}
+            />
           </div>
           <div>
             <span className={styles.logoText}>Expanso</span>
@@ -85,7 +100,6 @@ const Login = () => {
       </div>
 
       <div className={styles.flexContainer}>
-        {/* Left Section - Illustration */}
         <div className={styles.leftSection}>
           <div className={styles.illustrationContainer}>
             <img
@@ -118,29 +132,47 @@ const Login = () => {
                   <div className={styles.inputContainer}>
                     <input
                       className={styles.input}
-                      type={field.name === 'password' && showPassword ? 'text' : field.type}
+                      type={
+                        field.name === "password" && showPassword
+                          ? "text"
+                          : field.type
+                      }
                       placeholder={field.placeholder}
                       id={field.id}
                       name={field.name}
-                      value={loginAccountData[field.name as keyof typeof loginAccountData]}
+                      value={
+                        loginAccountData[
+                          field.name as keyof typeof loginAccountData
+                        ]
+                      }
                       autoComplete="off"
                       onChange={handleLoginChange}
                       required
                     />
-                    {field.name === 'password' && (
+                    {field.name === "password" && (
                       <button
                         type="button"
                         className={styles.passwordToggle}
                         onClick={() => setShowPassword(!showPassword)}
                       >
-                        {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                        {showPassword ? (
+                          <EyeOff size={20} />
+                        ) : (
+                          <Eye size={20} />
+                        )}
                       </button>
                     )}
                   </div>
-                  
+
                   {/* Validation Messages */}
-                  {field.name === 'email' && loginAccountData.email && (
-                    <div className={`${styles.validationMessage} ${isValidEmail(loginAccountData.email) ? styles.success : styles.error}`}>
+                  {field.name === "email" && loginAccountData.email && (
+                    <div
+                      className={`${styles.validationMessage} ${
+                        isValidEmail(loginAccountData.email)
+                          ? styles.success
+                          : styles.error
+                      }`}
+                    >
                       {isValidEmail(loginAccountData.email) ? (
                         <>
                           <CheckCircle size={14} />
@@ -156,7 +188,7 @@ const Login = () => {
                   )}
                 </div>
               ))}
-              
+
               <button type="submit" className={styles.button}>
                 Sign In
               </button>
