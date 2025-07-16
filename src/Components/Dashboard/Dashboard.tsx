@@ -17,10 +17,11 @@ import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const expenses = useSelector((state) => state.expense.expensesList);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const [activeTab, setActiveTab] = useState("today");
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("userExpenses", JSON.stringify(expenses));
@@ -32,27 +33,35 @@ const Dashboard = () => {
   };
 
   const handleViewInsights = () => {
-    navigate("/ViewInsights")
-  }
+    navigate("/ViewInsights");
+  };
 
   const handleSearchInput = (e) => {
-    setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-  }
+  };
+
+  useEffect(() => {
+    const searchData = expenses.filter((item) =>
+      item.category.toLowerCase().includes(search.toLowerCase())
+    );
+    setFilteredData(searchData);
+  }, [search, expenses]);
 
   return (
     <>
       <div className={styles.wrapper}>
         <DashboardSidebar />
         <div className={styles.rightMenu}>
-          {/* Header Section */}
           <div className={styles.dashtopdiv}>
             <div className={styles.headerLeft}>
               <h2 className={styles.dasheading}>Dashboard</h2>
-              <p className={styles.dashSubheading}>Welcome back! Here's your financial overview</p>
+              <p className={styles.dashSubheading}>
+                Welcome back! Here's your financial overview
+              </p>
             </div>
             <div className={styles.headerRight}>
               <div className={styles.searchContainer}>
@@ -80,18 +89,24 @@ const Dashboard = () => {
                   <AccountBalanceWalletIcon className={styles.balanceIcon} />
                   Balance Summary
                 </h2>
-                <p className={styles.balanceSubtitle}>Track your financial health</p>
+                <p className={styles.balanceSubtitle}>
+                  Track your financial health
+                </p>
               </div>
               <div className={styles.balanceTabs}>
-                <button 
-                  className={`${styles.tab} ${activeTab === 'today' ? styles.activeTab : ''}`}
-                  onClick={() => handleTabClick('today')}
+                <button
+                  className={`${styles.tab} ${
+                    activeTab === "today" ? styles.activeTab : ""
+                  }`}
+                  onClick={() => handleTabClick("today")}
                 >
                   Today
                 </button>
-                <button 
-                  className={`${styles.tab} ${activeTab === 'week' ? styles.activeTab : ''}`}
-                  onClick={() => handleTabClick('week')}
+                <button
+                  className={`${styles.tab} ${
+                    activeTab === "week" ? styles.activeTab : ""
+                  }`}
+                  onClick={() => handleTabClick("week")}
                 >
                   This Week
                 </button>
@@ -120,7 +135,7 @@ const Dashboard = () => {
                 <p className={styles.cardAmount}>₹ 5,000</p>
                 <span className={styles.cardSubtext}>Available balance</span>
               </div>
-              
+
               <div className={`${styles.card} ${styles.expense}`}>
                 <div className={styles.cardHeader}>
                   <div className={styles.cardIcon}>
@@ -133,9 +148,11 @@ const Dashboard = () => {
                 </div>
                 <h3>Current Month Expenditure</h3>
                 <p className={styles.cardAmount}>₹ 1,000</p>
-                <span className={styles.cardSubtext}>Total spent this month</span>
+                <span className={styles.cardSubtext}>
+                  Total spent this month
+                </span>
               </div>
-              
+
               <div className={`${styles.card} ${styles.income}`}>
                 <div className={styles.cardHeader}>
                   <div className={styles.cardIcon}>
@@ -148,7 +165,9 @@ const Dashboard = () => {
                 </div>
                 <h3>Current Month Earnings</h3>
                 <p className={styles.cardAmount}>₹ 4,000</p>
-                <span className={styles.cardSubtext}>Total earned this month</span>
+                <span className={styles.cardSubtext}>
+                  Total earned this month
+                </span>
               </div>
             </div>
 
@@ -168,10 +187,12 @@ const Dashboard = () => {
             <div className={styles.tableHeader}>
               <h3 className={styles.tableTitle}>Recent Transactions</h3>
               <div className={styles.tableActions}>
-                <span className={styles.recordCount}>{expenses.length} records</span>
+                <span className={styles.recordCount}>
+                  {expenses.length} records
+                </span>
               </div>
             </div>
-            
+
             <div className={styles.expenseTableHeader}>
               <ul className={styles.expenseTableHeadRow}>
                 <li>Name</li>
@@ -182,10 +203,15 @@ const Dashboard = () => {
               </ul>
             </div>
 
-            {expenses.length > 0 ? (
+            {filteredData.length > 0 ? (
               <div className={styles.expenseTableBody}>
-                {expenses.map((field, index) => (
-                  <ul className={`${styles.expenseTableRow} ${index % 2 === 0 ? styles.evenRow : ''}`} key={field.id}>
+                {filteredData.map((field, index) => (
+                  <ul
+                    className={`${styles.expenseTableRow} ${
+                      index % 2 === 0 ? styles.evenRow : ""
+                    }`}
+                    key={field.id}
+                  >
                     <li className={styles.nameCell}>
                       <div className={styles.nameContainer}>
                         <div className={styles.nameInitial}>
@@ -195,7 +221,9 @@ const Dashboard = () => {
                       </div>
                     </li>
                     <li>
-                      <span className={styles.categoryBadge}>{field.category}</span>
+                      <span className={styles.categoryBadge}>
+                        {field.category}
+                      </span>
                     </li>
                     <li className={styles.dateCell}>{field.date}</li>
                     <li className={styles.amountCell}>₹ {field.amount}</li>
@@ -204,7 +232,7 @@ const Dashboard = () => {
                         <button className={styles.editButton}>
                           <EditNoteIcon />
                         </button>
-                        <button 
+                        <button
                           className={styles.deleteButton}
                           onClick={() => handleDeleteExpenseData(field.id)}
                         >
