@@ -19,13 +19,19 @@ const Dashboard = () => {
   const expenses = useSelector((state) => state.expense.expensesList);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [activeTab, setActiveTab] = useState("today");
+  const [activeTab, setActiveTab] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("userExpenses", JSON.stringify(expenses));
   }, [expenses]);
+
+  const getFilteredData = () => {
+  if(search.trim() !== "") return filteredData
+  if(activeTab ===  "today") return todayexpenses
+  return expenses
+  }
 
   const handleDeleteExpenseData = (id: number) => {
     dispatch(deleteExpense(id));
@@ -50,6 +56,15 @@ const Dashboard = () => {
     );
     setFilteredData(searchData);
   }, [search, expenses]);
+
+  const date = new Date();
+  const formattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}}`
+
+  const todayexpenses = expenses.filter((item) => {
+    const date = new Date(item.date);
+    const isFormattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}}`
+    return formattedDate === isFormattedDate
+  })
 
   return (
     <>
@@ -203,9 +218,9 @@ const Dashboard = () => {
               </ul>
             </div>
 
-            {filteredData.length > 0 ? (
+            {getFilteredData().length > 0 ? (
               <div className={styles.expenseTableBody}>
-                {filteredData.map((field, index) => (
+                {getFilteredData().map((field, index) => (
                   <ul
                     className={`${styles.expenseTableRow} ${
                       index % 2 === 0 ? styles.evenRow : ""
