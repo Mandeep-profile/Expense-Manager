@@ -30,6 +30,7 @@ const Dashboard = () => {
   const getFilteredData = () => {
   if(search.trim() !== "") return filteredData
   if(activeTab ===  "today") return todayexpenses
+  if(activeTab === "week") return weekExpenses
   return expenses
   }
 
@@ -64,6 +65,20 @@ const Dashboard = () => {
     const date = new Date(item.date);
     const isFormattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}}`
     return formattedDate === isFormattedDate
+  })
+
+  const dayOfWeek = date.getDay();
+  const startOfWeek = new Date(date)
+  startOfWeek.setDate(date.getDate() - dayOfWeek)
+  startOfWeek.setHours(0, 0, 0, 0)
+
+  const endOfWeek = new Date(startOfWeek)
+  endOfWeek.setDate(startOfWeek.getDate() + 6)
+  endOfWeek.setHours(23, 59, 59, 999)
+
+  const weekExpenses = expenses.filter((item) => {
+    const itemDate = new Date(item.date)
+    return itemDate >= startOfWeek && itemDate <= endOfWeek
   })
 
   return (
