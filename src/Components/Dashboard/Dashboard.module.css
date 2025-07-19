@@ -294,6 +294,13 @@
   color: #1e293b;
 }
 
+.negative{
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #dc2626;
+}
+
 .cardSubtext {
   font-size: 12px;
   color: #94a3b8;

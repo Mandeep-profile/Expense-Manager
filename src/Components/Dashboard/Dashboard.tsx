@@ -25,9 +25,18 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const monthlyEarnings = JSON.parse(
+    localStorage.getItem("userDetails") || " "
+  );
+
   useEffect(() => {
     localStorage.setItem("userExpenses", JSON.stringify(expenses));
   }, [expenses]);
+
+  const totalAmount = expenses
+    .filter((item) => item.amount)
+    .map((item) => parseInt(item.amount));
+  const currentExpenditure = totalAmount.reduce((acc, val) => val + acc, 0);
 
   const getFilteredData = () => {
     if (search.trim() !== "") return filteredData;
@@ -92,12 +101,9 @@ const Dashboard = () => {
   });
 
   // Get Montly Data
- console.log(selectMonth);
   const selectedMonthExpenses = expenses.filter((item) => {
     const itemDate = new Date(item.date);
-    return (
-      itemDate.getMonth() === selectMonth
-    );
+    return itemDate.getMonth() === selectMonth;
   });
 
   return (
@@ -188,7 +194,14 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <h3>Net Balance</h3>
-                <p className={styles.cardAmount}>₹ 5,000</p>
+                <p
+                  className={`${
+                    monthlyEarnings.income - currentExpenditure < 0 ? styles.negative : styles.cardAmount
+                  }`}
+                >
+                  ₹ {monthlyEarnings.income - currentExpenditure}
+                </p>
+
                 <span className={styles.cardSubtext}>Available balance</span>
               </div>
 
@@ -203,7 +216,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <h3>Current Month Expenditure</h3>
-                <p className={styles.cardAmount}>₹ 1,000</p>
+                <p className={styles.cardAmount}>₹ {currentExpenditure}</p>
                 <span className={styles.cardSubtext}>
                   Total spent this month
                 </span>
@@ -220,7 +233,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <h3>Current Month Earnings</h3>
-                <p className={styles.cardAmount}>₹ 4,000</p>
+                <p className={styles.cardAmount}>₹ {monthlyEarnings.income}</p>
                 <span className={styles.cardSubtext}>
                   Total earned this month
                 </span>
