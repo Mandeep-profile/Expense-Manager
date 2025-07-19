@@ -16,10 +16,12 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
+  const date = new Date();
   const expenses = useSelector((state) => state.expense.expensesList);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
-  const [activeTab, setActiveTab] = useState("");
+  const [selectMonth, setSelectMonth] = useState(date.getMonth());
+  const [activeTab, setActiveTab] = useState("month");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,11 +30,12 @@ const Dashboard = () => {
   }, [expenses]);
 
   const getFilteredData = () => {
-  if(search.trim() !== "") return filteredData
-  if(activeTab ===  "today") return todayexpenses
-  if(activeTab === "week") return weekExpenses
-  return expenses
-  }
+    if (search.trim() !== "") return filteredData;
+    if (activeTab === "today") return todayexpenses;
+    if (activeTab === "week") return weekExpenses;
+    if (activeTab === "month") return selectedMonthExpenses;
+    return expenses;
+  };
 
   const handleDeleteExpenseData = (id: number) => {
     dispatch(deleteExpense(id));
@@ -58,28 +61,44 @@ const Dashboard = () => {
     setFilteredData(searchData);
   }, [search, expenses]);
 
-  const date = new Date();
-  const formattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}}`
+  // Get Today Data
+
+  const formattedDate = `${
+    date.getMonth() + 1
+  }-${date.getDate()}-${date.getFullYear()}}`;
 
   const todayexpenses = expenses.filter((item) => {
     const date = new Date(item.date);
-    const isFormattedDate = `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}}`
-    return formattedDate === isFormattedDate
-  })
+    const isFormattedDate = `${
+      date.getMonth() + 1
+    }-${date.getDate()}-${date.getFullYear()}}`;
+    return formattedDate === isFormattedDate;
+  });
+
+  // Get Current Week Data
 
   const dayOfWeek = date.getDay();
-  const startOfWeek = new Date(date)
-  startOfWeek.setDate(date.getDate() - dayOfWeek)
-  startOfWeek.setHours(0, 0, 0, 0)
+  const startOfWeek = new Date(date);
+  startOfWeek.setDate(date.getDate() - dayOfWeek);
+  startOfWeek.setHours(0, 0, 0, 0);
 
-  const endOfWeek = new Date(startOfWeek)
-  endOfWeek.setDate(startOfWeek.getDate() + 6)
-  endOfWeek.setHours(23, 59, 59, 999)
+  const endOfWeek = new Date(startOfWeek);
+  endOfWeek.setDate(startOfWeek.getDate() + 6);
+  endOfWeek.setHours(23, 59, 59, 999);
 
   const weekExpenses = expenses.filter((item) => {
-    const itemDate = new Date(item.date)
-    return itemDate >= startOfWeek && itemDate <= endOfWeek
-  })
+    const itemDate = new Date(item.date);
+    return itemDate >= startOfWeek && itemDate <= endOfWeek;
+  });
+
+  // Get Montly Data
+ console.log(selectMonth);
+  const selectedMonthExpenses = expenses.filter((item) => {
+    const itemDate = new Date(item.date);
+    return (
+      itemDate.getMonth() === selectMonth
+    );
+  });
 
   return (
     <>
@@ -140,7 +159,14 @@ const Dashboard = () => {
                 >
                   This Week
                 </button>
-                <select className={styles.monthSelect}>
+                <select
+                  className={styles.monthSelect}
+                  value={selectMonth}
+                  onChange={(e) => {
+                    setSelectMonth(parseInt(e.target.value));
+                    handleTabClick("month");
+                  }}
+                >
                   {MonthsName.map((month) => (
                     <option key={month.value} value={month.value}>
                       {month.name}
@@ -235,7 +261,7 @@ const Dashboard = () => {
 
             {getFilteredData().length > 0 ? (
               <div className={styles.expenseTableBody}>
-                {getFilteredData().map((field, index) => (
+                {getFilteredData()?.map((field, index) => (
                   <ul
                     className={`${styles.expenseTableRow} ${
                       index % 2 === 0 ? styles.evenRow : ""
