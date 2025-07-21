@@ -3,16 +3,16 @@ import { useDispatch } from "react-redux";
 import styles from "./AddExpense.module.css";
 import { addExpense } from "./ExpenseSlice";
 import { toast } from "react-toastify";
-import { 
-  Receipt, 
-  DollarSign, 
-  Calendar, 
-  Tag, 
+import {
+  Receipt,
+  DollarSign,
+  Calendar,
+  Tag,
   Plus,
   ShoppingCart,
   Car,
   Gamepad2,
-  MoreHorizontal
+  MoreHorizontal,
 } from "lucide-react";
 
 const AddExpense = () => {
@@ -25,7 +25,11 @@ const AddExpense = () => {
 
   const dispatch = useDispatch();
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const userDetails = JSON.parse(localStorage.getItem("currentuser") || "{}");
+
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -34,37 +38,40 @@ const AddExpense = () => {
 
   const handleExpenseFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {name, category, date, amount} = formData
+    const { name, category, date, amount } = formData;
 
-    if(!name || !category || !date || !amount){
+    if (!name || !category || !date || !amount) {
       toast.error("All Fields are required");
       return;
     }
 
-    dispatch(
-      addExpense({
-        id: Date.now(),
-        name: formData.name,
-        category: formData.category,
-        date: formData.date,
-        amount: formData.amount,
-      })
-    );
+    const newExpense = {
+      id: Date.now(),
+      name: formData.name,
+      category: formData.category,
+      date: formData.date,
+      amount: formData.amount,
+    }
+    dispatch(addExpense({email: userDetails?.email, expense: newExpense}));
     setFormData({
       name: "",
       amount: "",
       category: "",
       date: "",
     });
-    toast.success("New Expense Added")
+    toast.success("New Expense Added");
   };
 
   const getCategoryIcon = (category: string) => {
-    switch(category) {
-      case 'Food': return <ShoppingCart size={20} />;
-      case 'Transport': return <Car size={20} />;
-      case 'Entertainment': return <Gamepad2 size={20} />;
-      default: return <MoreHorizontal size={20} />;
+    switch (category) {
+      case "Food":
+        return <ShoppingCart size={20} />;
+      case "Transport":
+        return <Car size={20} />;
+      case "Entertainment":
+        return <Gamepad2 size={20} />;
+      default:
+        return <MoreHorizontal size={20} />;
     }
   };
 
@@ -77,7 +84,9 @@ const AddExpense = () => {
           </div>
           <div className={styles.headerContent}>
             <h1 className={styles.title}>Add New Expense</h1>
-            <p className={styles.subtitle}>Track your spending and manage your budget</p>
+            <p className={styles.subtitle}>
+              Track your spending and manage your budget
+            </p>
           </div>
         </div>
 
@@ -162,7 +171,7 @@ const AddExpense = () => {
                 className={styles.input}
                 value={formData.date}
                 onChange={handleFormChange}
-                max={new Date().toISOString().split('T')[0]}
+                max={new Date().toISOString().split("T")[0]}
                 required
               />
             </div>
@@ -173,13 +182,13 @@ const AddExpense = () => {
               <div className={styles.summaryItem}>
                 <span className={styles.summaryLabel}>Category:</span>
                 <span className={styles.summaryValue}>
-                  {formData.category || 'Not selected'}
+                  {formData.category || "Not selected"}
                 </span>
               </div>
               <div className={styles.summaryItem}>
                 <span className={styles.summaryLabel}>Amount:</span>
                 <span className={styles.summaryValue}>
-                  {formData.amount ? `₹${formData.amount}` : '₹0.00'}
+                  {formData.amount ? `₹${formData.amount}` : "₹0.00"}
                 </span>
               </div>
             </div>

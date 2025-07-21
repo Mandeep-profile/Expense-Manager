@@ -33,12 +33,12 @@ const DashboardSidebar: React.FC = () => {
       label: 'Add Expense',
       description: 'Record new expenses'
     },
-    {
-      path: '/report',
-      icon: <SummarizeOutlined />,
-      label: 'Reports',
-      description: 'Financial insights'
-    },
+    // {
+    //   path: '/report',
+    //   icon: <SummarizeOutlined />,
+    //   label: 'Reports',
+    //   description: 'Financial insights'
+    // },
     {
       path: '/settings',
       icon: <SettingsOutlined />,

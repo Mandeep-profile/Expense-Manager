@@ -2,14 +2,12 @@ import { useState } from "react";
 import { FormData } from "../../Utils/JsonData";
 import personImg from "../../assets/Person__Image.png";
 import ExpansoLogo from "../../assets/Expanso_Logo.png"
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { CreditCard, User, Mail, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from "lucide-react";
+import { User, Mail, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from "lucide-react";
 import styles from "./Auth.module.css";
 
 const Signup = () => {
-  // const [showImage, setShowImage] = useState(true);
-  // const [fadeOut, setFadeOut] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [accountData, setAccountData] = useState({
@@ -20,23 +18,6 @@ const Signup = () => {
   });
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-  // useEffect(() => {
-  //   if (location.pathname === "/") {
-  //     const fadeTimer = setTimeout(() => setFadeOut(true), 2000);
-  //     const hideTimer = setTimeout(() => setShowImage(false), 3000);
-
-  //     return () => {
-  //       clearTimeout(fadeTimer);
-  //       clearTimeout(hideTimer);
-  //     };
-  //   } else if (location.pathname === "/login") {
-  //     setShowImage(false);
-  //   } else {
-  //     setShowImage(false);
-  //   }
-  // }, []);
 
   const handleAccountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAccountData({

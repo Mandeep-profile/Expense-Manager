@@ -54,6 +54,11 @@ const CATEGORY_ICONS: Record<string, string> = {
   Other: "📦",
 };
 
+const monthlyEarnings = JSON.parse(
+    localStorage.getItem("userDetails") || " "
+  );
+
+
 const ViewInsights = () => {
   const expenses = useSelector((state: RootState) => state.expense.expensesList);
   const navigate = useNavigate()
@@ -72,7 +77,7 @@ const ViewInsights = () => {
     return {
       month,
       expenditure: totalExpenditure,
-      earnings: totalExpenditure ? 5000 : 0,
+      earnings: totalExpenditure !== 0 ? monthlyEarnings.income : "",
     };
   });
 
@@ -90,7 +95,7 @@ const ViewInsights = () => {
 
   const totalExpenses = expenses.reduce((sum, item) => sum + Number(item.amount), 0);
   const totalEarnings = 25000; // Mock data
-  const savingsRate = ((totalEarnings - totalExpenses) / totalEarnings * 100).toFixed(1);
+  const savingsRate = ((monthlyEarnings.income - totalExpenses) / totalEarnings * 100).toFixed(1);
 
   const trendData = barChartData.slice(-6).map((item, index) => ({
     ...item,
@@ -166,7 +171,7 @@ const ViewInsights = () => {
           </div>
           <div className={styles.statContent}>
             <h3>Total Earnings</h3>
-            <p className={styles.statValue}>₹{totalEarnings.toLocaleString()}</p>
+            <p className={styles.statValue}>₹{monthlyEarnings.income.toLocaleString()}</p>
           </div>
         </motion.div>
 

@@ -2,52 +2,63 @@ import { useState, useEffect } from "react";
 import { MonthsName } from "../../Utils/JsonData";
 import styles from "./Dashboard.module.css";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import EditNoteIcon from "@mui/icons-material/EditNote";
 import SearchIcon from "@mui/icons-material/Search";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import DashboardSidebar from "./DashboardSidebar";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteExpense } from "../AddExpense/ExpenseSlice";
+import { loadUserExpenses, deleteExpense } from "../AddExpense/ExpenseSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
-  const date = new Date();
-  const expenses = useSelector((state) => state.expense.expensesList);
   const [search, setSearch] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const date = new Date();
   const [selectMonth, setSelectMonth] = useState(date.getMonth());
   const [activeTab, setActiveTab] = useState("month");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const expenses = useSelector((state) => state.expense.expensesList);
 
   const monthlyEarnings = JSON.parse(
-    localStorage.getItem("userDetails") || " "
+    localStorage.getItem("userDetails") || "{}"
   );
+
+  const userDetails = JSON.parse(localStorage.getItem("currentuser") || "{}");
+  const userEmail = userDetails?.email;
 
   useEffect(() => {
     localStorage.setItem("userExpenses", JSON.stringify(expenses));
   }, [expenses]);
 
+
   const totalAmount = expenses
-    .filter((item) => item.amount)
+    .filter((item) => item && item.amount)
     .map((item) => parseInt(item.amount));
   const currentExpenditure = totalAmount.reduce((acc, val) => val + acc, 0);
 
   const getFilteredData = () => {
     if (search.trim() !== "") return filteredData;
-    if (activeTab === "today") return todayexpenses;
+    if (activeTab === "today") return todayExpenses;
     if (activeTab === "week") return weekExpenses;
     if (activeTab === "month") return selectedMonthExpenses;
     return expenses;
   };
 
+  useEffect(() => {
+    const userDetails = JSON.parse(localStorage.getItem("currentuser") || "{}");
+    const userEmail = userDetails?.email;
+
+    if (userEmail) {
+      dispatch(loadUserExpenses(userEmail));
+    }
+  }, []);
+
   const handleDeleteExpenseData = (id: number) => {
-    dispatch(deleteExpense(id));
+    dispatch(deleteExpense({ email: userEmail, id }));
     toast.info("Expense Deleted");
   };
 
@@ -76,7 +87,7 @@ const Dashboard = () => {
     date.getMonth() + 1
   }-${date.getDate()}-${date.getFullYear()}}`;
 
-  const todayexpenses = expenses.filter((item) => {
+  const todayExpenses = expenses.filter((item) => {
     const date = new Date(item.date);
     const isFormattedDate = `${
       date.getMonth() + 1
@@ -129,10 +140,6 @@ const Dashboard = () => {
                   onChange={handleSearchInput}
                 />
               </div>
-              <button className={styles.filterButton}>
-                <FilterListIcon />
-                Filter
-              </button>
             </div>
           </div>
 
@@ -196,7 +203,9 @@ const Dashboard = () => {
                 <h3>Net Balance</h3>
                 <p
                   className={`${
-                    monthlyEarnings.income - currentExpenditure < 0 ? styles.negative : styles.cardAmount
+                    monthlyEarnings.income - currentExpenditure < 0
+                      ? styles.negative
+                      : styles.cardAmount
                   }`}
                 >
                   ₹ {monthlyEarnings.income - currentExpenditure}
@@ -298,9 +307,9 @@ const Dashboard = () => {
                     <li className={styles.amountCell}>₹ {field.amount}</li>
                     <li className={styles.actionCell}>
                       <div className={styles.actionButtons}>
-                        <button className={styles.editButton}>
+                        {/* <button className={styles.editButton}>
                           <EditNoteIcon />
-                        </button>
+                        </button> */}
                         <button
                           className={styles.deleteButton}
                           onClick={() => handleDeleteExpenseData(field.id)}
