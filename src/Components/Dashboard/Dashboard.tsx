@@ -30,11 +30,6 @@ const Dashboard = () => {
   const userDetails = JSON.parse(localStorage.getItem("currentuser") || "{}");
   const userEmail = userDetails?.email;
 
-  useEffect(() => {
-    localStorage.setItem("userExpenses", JSON.stringify(expenses));
-  }, [expenses]);
-
-
   const totalAmount = expenses
     .filter((item) => item && item.amount)
     .map((item) => parseInt(item.amount));
@@ -57,8 +52,9 @@ const Dashboard = () => {
     }
   }, []);
 
-  const handleDeleteExpenseData = (id: number) => {
-    dispatch(deleteExpense({ email: userEmail, id }));
+  const handleDeleteExpenseData = (expenseid: number) => {
+    if (!userEmail) return;
+    dispatch(deleteExpense({ email: userEmail, id: expenseid }));
     toast.info("Expense Deleted");
   };
 

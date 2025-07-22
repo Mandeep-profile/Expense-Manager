@@ -12,8 +12,6 @@ interface ExpenseState {
   expensesList: ExpenseItem[];
 }
 
-const getUserKeys = (email:string) => `userExpenses_${email}`
-
 const initialState: ExpenseState = {
   expensesList: [],
 };
@@ -23,24 +21,43 @@ const expenseSlice = createSlice({
   initialState,
   reducers: {
     loadUserExpenses: (state, action) => {
-      const email = action.payload
-      const savedItems = localStorage.getItem(getUserKeys(email))
-      state.expensesList = savedItems ? JSON.parse(savedItems) : []
-    },
-    addExpense: (state, action) => {
-      const {email, expense} = action.payload
-      state.expensesList.push(expense);
-      localStorage.setItem(getUserKeys(email), JSON.stringify(state.expensesList))
-    },
-    deleteExpense: (state, action) => {
-      const {email, id} = action.payload
-      state.expensesList = state.expensesList.filter(
-        (expense) => expense.id !== id,
-        localStorage.setItem(getUserKeys(email), JSON.stringify(state.expensesList))
+      const email = action.payload;
+      const storedExpenses = JSON.parse(
+        localStorage.getItem(`userExpenses_${email}`) || "[]"
       );
+      state.expensesList = storedExpenses;
+    },
+
+    addExpense: (state, action) => {
+      const { email, expense } = action.payload;
+      const stored = JSON.parse(
+        localStorage.getItem(`userExpenses_${email}`) || "[]"
+      );
+      const updatedExpenses = [...stored, expense];
+
+      localStorage.setItem(
+        `userExpenses_${email}`,
+        JSON.stringify(updatedExpenses)
+      );
+      state.expensesList = updatedExpenses;
+    },
+
+    deleteExpense: (state, action) => {
+      const { email, id } = action.payload;
+      const stored = JSON.parse(
+        localStorage.getItem(`userExpenses_${email}`) || "[]"
+      );
+      const updatedExpenses = stored.filter((exp) => exp.id !== id);
+
+      localStorage.setItem(
+        `userExpenses_${email}`,
+        JSON.stringify(updatedExpenses)
+      );
+      state.expensesList = updatedExpenses;
     },
   },
 });
 
-export const { loadUserExpenses, addExpense, deleteExpense } = expenseSlice.actions;
+export const { loadUserExpenses, addExpense, deleteExpense } =
+  expenseSlice.actions;
 export default expenseSlice.reducer;
