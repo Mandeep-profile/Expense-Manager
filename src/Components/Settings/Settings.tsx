@@ -51,8 +51,7 @@ const Settings = () => {
       return;
     }
 
-    // Update user data
-    const users = JSON.parse(localStorage.getItem("expansoUsers") || "[]");
+    const users = JSON.parse(localStorage.getItem("expensoUsers") || "[]");
     const updatedUsers = users.map((user: any) =>
       user.email === currentUser.email
         ? {
@@ -65,7 +64,7 @@ const Settings = () => {
         : user
     );
 
-    localStorage.setItem("expansoUsers", JSON.stringify(updatedUsers));
+    localStorage.setItem("expensoUsers", JSON.stringify(updatedUsers));
     localStorage.setItem(
       "currentuser",
       JSON.stringify({
@@ -96,11 +95,11 @@ const Settings = () => {
         "Are you sure you want to delete your account? This action cannot be undone."
       )
     ) {
-      const users = JSON.parse(localStorage.getItem("expansoUsers") || "[]");
+      const users = JSON.parse(localStorage.getItem("expensoUsers") || "[]");
       const updatedUsers = users.filter(
         (user: any) => user.email !== currentUser.email
       );
-      localStorage.setItem("expansoUsers", JSON.stringify(updatedUsers));
+      localStorage.setItem("expensoUsers", JSON.stringify(updatedUsers));
       localStorage.removeItem("isAuthenticated");
       localStorage.removeItem("currentuser");
       toast.success("Account deleted successfully");

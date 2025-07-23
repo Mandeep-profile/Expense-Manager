@@ -42,7 +42,7 @@ const Login = () => {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("expansoUsers") || "[]");
+    const users = JSON.parse(localStorage.getItem("expensoUsers") || "[]");
 
     const matchedUser = users.find(
       (user: any) =>
@@ -107,7 +107,7 @@ const Login = () => {
         <div className={styles.rightSection}>
           <div className={styles.formContainer}>
             <div className={styles.formHeader}>
-              <h2 className={styles.formHeading}>Welcome Back</h2>
+              <h2 className={styles.formHeading}>WELCOME BACK</h2>
               <p className={styles.formSubtitle}>Sign in to your account</p>
             </div>
 
@@ -179,7 +179,7 @@ const Login = () => {
               ))}
 
               <button type="submit" className={styles.button}>
-                Sign In
+                LOGIN
               </button>
             </form>
 

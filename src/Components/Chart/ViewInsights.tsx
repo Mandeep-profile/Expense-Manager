@@ -55,7 +55,7 @@ const CATEGORY_ICONS: Record<string, string> = {
 };
 
 const monthlyEarnings = JSON.parse(
-    localStorage.getItem("userDetails") || " "
+    localStorage.getItem("userDetails") || "[]"
   );
 
 
@@ -94,7 +94,7 @@ const ViewInsights = () => {
   }));
 
   const totalExpenses = expenses.reduce((sum, item) => sum + Number(item.amount), 0);
-  const totalEarnings = 25000; // Mock data
+  const totalEarnings = 25000; 
   const savingsRate = ((monthlyEarnings.income - totalExpenses) / totalEarnings * 100).toFixed(1);
 
   const trendData = barChartData.slice(-6).map((item, index) => ({
@@ -171,7 +171,7 @@ const ViewInsights = () => {
           </div>
           <div className={styles.statContent}>
             <h3>Total Earnings</h3>
-            <p className={styles.statValue}>₹{monthlyEarnings.income.toLocaleString()}</p>
+            <p className={styles.statValue}>₹{monthlyEarnings.income || 0}</p>
           </div>
         </motion.div>
 

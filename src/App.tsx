@@ -17,6 +17,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
+import ErrorPage from "./Components/Error/ErrorPage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function AnimatedRoutes() {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Signup />} />
+        <Route path="*" element={<ErrorPage />} />
         <Route
           path="/login"
           element={
@@ -44,10 +46,31 @@ function AnimatedRoutes() {
         <Route path="/setup" element={<UserSetup />} />
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/addexpense" element={<AddExpense />} />
+          <Route
+            path="/addexpense"
+            element={
+              <ProtectedRoute>
+                <AddExpense />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/report" element={<Report />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/ViewInsights" element={<ViewInsights />} />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute>
+                <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/ViewInsights"
+            element={
+              <ProtectedRoute>
+                <ViewInsights />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>

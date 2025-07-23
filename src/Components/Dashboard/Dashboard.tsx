@@ -204,7 +204,7 @@ const Dashboard = () => {
                       : styles.cardAmount
                   }`}
                 >
-                  ₹ {monthlyEarnings.income - currentExpenditure}
+                  ₹ {monthlyEarnings.income - currentExpenditure || 0}
                 </p>
 
                 <span className={styles.cardSubtext}>Available balance</span>
@@ -238,7 +238,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <h3>Current Month Earnings</h3>
-                <p className={styles.cardAmount}>₹ {monthlyEarnings.income}</p>
+                <p className={styles.cardAmount}>₹ {monthlyEarnings.income || 0}</p>
                 <span className={styles.cardSubtext}>
                   Total earned this month
                 </span>
@@ -303,9 +303,6 @@ const Dashboard = () => {
                     <li className={styles.amountCell}>₹ {field.amount}</li>
                     <li className={styles.actionCell}>
                       <div className={styles.actionButtons}>
-                        {/* <button className={styles.editButton}>
-                          <EditNoteIcon />
-                        </button> */}
                         <button
                           className={styles.deleteButton}
                           onClick={() => handleDeleteExpenseData(field.id)}

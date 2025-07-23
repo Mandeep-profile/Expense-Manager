@@ -42,7 +42,7 @@ const Signup = () => {
       return;
     }
 
-    const users = JSON.parse(localStorage.getItem("expansoUsers") || "[]");
+    const users = JSON.parse(localStorage.getItem("expensoUsers") || "[]");
 
     const userExist = users.some(
       (user: any) => user.email.toLowerCase() === email.toLowerCase()
@@ -56,7 +56,7 @@ const Signup = () => {
     const newUser = { name, email, password, cpassword };
     const updatedUsers = [...users, newUser];
 
-    localStorage.setItem("expansoUsers", JSON.stringify(updatedUsers));
+    localStorage.setItem("expensoUsers", JSON.stringify(updatedUsers));
     toast.success("Account Created Successfully");
     navigate("/login");
   };
@@ -108,7 +108,7 @@ const Signup = () => {
             <div className={styles.rightSection}>
               <div className={styles.formContainer}>
                 <div className={styles.formHeader}>
-                  <h2 className={styles.formHeading}>Create Account</h2>
+                  <h2 className={styles.formHeading}>CREATE ACCOUNT</h2>
                   <p className={styles.formSubtitle}>Start your financial journey today</p>
                 </div>
 
@@ -206,7 +206,7 @@ const Signup = () => {
                   ))}
                   
                   <button type="submit" className={styles.button}>
-                    Create Account
+                    CREATE ACCOUNT
                   </button>
                 </form>
 
