@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { User, Mail, Lock, Eye, EyeOff, CheckCircle, AlertCircle } from "lucide-react";
 import styles from "./Auth.module.css";
+import CardAnimation from "./CardAnimation";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -102,21 +103,8 @@ const Signup = () => {
           </div>
 
           <div className={styles.flexContainer}>
-            <div className={styles.leftSection}>
-              <div className={styles.illustrationContainer}>
-                <img
-                  className={styles.Personimage}
-                  src={personImg}
-                  alt="Person Illustration"
-                />
-                <div className={styles.illustrationOverlay}>
-                  <h3>Join Other users</h3>
-                  <p>Managing their finances smarter with Expanso</p>
-                </div>
-              </div>
-            </div>
+            <CardAnimation />
 
-            {/* Right Section - Form */}
             <div className={styles.rightSection}>
               <div className={styles.formContainer}>
                 <div className={styles.formHeader}>

@@ -14,6 +14,7 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
+import CardAnimation from "./CardAnimation";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -100,19 +101,7 @@ const Login = () => {
       </div>
 
       <div className={styles.flexContainer}>
-        <div className={styles.leftSection}>
-          <div className={styles.illustrationContainer}>
-            <img
-              className={styles.Personimage}
-              src={personImg}
-              alt="Person Illustration"
-            />
-            <div className={styles.illustrationOverlay}>
-              <h3>Welcome Back!</h3>
-              <p>Continue managing your finances with Expanso</p>
-            </div>
-          </div>
-        </div>
+        <CardAnimation />
 
         {/* Right Section - Form */}
         <div className={styles.rightSection}>

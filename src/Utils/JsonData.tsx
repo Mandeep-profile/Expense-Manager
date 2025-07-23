@@ -4,14 +4,14 @@ export const FormData = [
     id: "FLName",
     name: "name",
     type: "text",
-    placeholder: "John Doe",
+    placeholder: "Enter your name",
   },
   {
     label: "Email Address",
     id: "Email",
     name: "email",
     type: "email",
-    placeholder: "you@example.com",
+    placeholder: "Enter your email address",
   },
   {
     label: "Password",
@@ -35,7 +35,7 @@ export const LoginFormData = [
     id: "Email",
     name: "email",
     type: "email",
-    placeholder: "you@example.com",
+    placeholder: "Enter your email address",
   },
   {
     label: "Password",

@@ -5,7 +5,10 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   position: relative;
   overflow-x: hidden;
-  font-family: "outfit";
+}
+
+.expansologo{
+  width: 55px;
 }
 
 .backgroundElements {
@@ -92,7 +95,7 @@
 }
 
 .logoText {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   -webkit-background-clip: text;
@@ -116,6 +119,19 @@
   z-index: 1;
 }
 
+
+/* Visual Container */
+.visualContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 /* Left Section */
 .leftSection {
   flex: 1;
@@ -127,26 +143,317 @@
   position: relative;
 }
 
-.illustrationContainer {
-  position: relative;
+/* Dashboard Preview (Login Page) */
+.dashboardPreview {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 400px;
+  animation: dashboardFloat 6s ease-in-out infinite;
+}
+
+@keyframes dashboardFloat {
+  0%, 100% { transform: translateY(0px) rotateY(0deg); }
+  50% { transform: translateY(-10px) rotateY(5deg); }
+}
+
+.dashboardHeader {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
+
+.dashboardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.dashboardDate {
+  font-size: 14px;
+  color: #64748b;
+  background: rgba(59, 130, 246, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+}
+
+.statsCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  animation: cardPulse 3s ease-in-out infinite;
+}
+
+.statCard.income {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.05));
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  animation-delay: 0s;
+}
+
+.statCard.expenses {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(220, 38, 38, 0.05));
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  animation-delay: 1s;
+}
+
+.statCard.savings {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(29, 78, 216, 0.05));
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  animation-delay: 2s;
+}
+
+@keyframes cardPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.statIcon {
+  font-size: 24px;
+  margin-right: 1rem;
+}
+
+.statValue {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  flex: 1;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-right: 0.5rem;
+}
+
+.statTrend {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+}
+
+.chartContainer {
   text-align: center;
 }
 
-.Personimage {
+.chartTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.chart {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  height: 80px;
+  gap: 0.5rem;
+}
+
+.chartBar {
+  flex: 1;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  border-radius: 4px 4px 0 0;
+  animation: barGrow 2s ease-out infinite alternate;
+  min-height: 20px;
+}
+
+@keyframes barGrow {
+  0% { transform: scaleY(0.8); }
+  100% { transform: scaleY(1); }
+}
+
+/* Financial Elements (Signup Page) */
+.financialElements {
+  position: relative;
+  width: 100%;
   max-width: 400px;
-  height: auto;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
-  transition: transform 0.3s ease;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.Personimage:hover {
-  transform: scale(1.05);
+.floatingCard {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border-radius: 20px;
+  padding: 1.5rem;
+  width: 280px;
+  height: 180px;
+  color: white;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: cardFloat 4s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
 }
 
-.illustrationOverlay {
+@keyframes cardFloat {
+  0%, 100% { transform: translateY(0px) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translateY(-15px) rotateX(5deg) rotateY(5deg); }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.cardChip {
+  width: 40px;
+  height: 30px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-radius: 6px;
+}
+
+.cardType {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.cardNumber {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  font-family: 'Courier New', monospace;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardName {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.cardExpiry {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.floatingCoins {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 1rem;
+}
+
+.coin {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
+  animation: coinSpin 3s linear infinite;
+}
+
+.coin:nth-child(2) { animation-delay: 1s; }
+.coin:nth-child(3) { animation-delay: 2s; }
+
+@keyframes coinSpin {
+  0% { transform: rotateY(0deg) translateY(0px); }
+  50% { transform: rotateY(180deg) translateY(-10px); }
+  100% { transform: rotateY(360deg) translateY(0px); }
+}
+
+.transactionList {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-radius: 16px;
+  padding: 1rem;
+  width: 200px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: listSlide 5s ease-in-out infinite;
+}
+
+@keyframes listSlide {
+  0%, 100% { transform: translateX(0px); }
+  50% { transform: translateX(10px); }
+}
+
+.transaction {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+.transaction:last-child {
+  border-bottom: none;
+}
+
+.transactionIcon {
+  font-size: 16px;
+  width: 32px;
+  height: 32px;
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.transactionDetails {
+  flex: 1;
+}
+
+.transactionName {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.transactionAmount {
+  font-size: 12px;
+  font-weight: 700;
+  color: #059669;
+}
+
+.transaction:nth-child(3) .transactionAmount {
+  color: #dc2626;
+}
+
+/* Welcome Message */
+.welcomeMessage {
   margin-top: 2rem;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.9);
@@ -154,16 +461,23 @@
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+  animation: messageGlow 4s ease-in-out infinite;
 }
 
-.illustrationOverlay h3 {
+@keyframes messageGlow {
+  0%, 100% { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+  50% { box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2); }
+}
+
+.welcomeMessage h3 {
   font-size: 24px;
   font-weight: 700;
   color: #1e293b;
   margin-bottom: 0.5rem;
 }
 
-.illustrationOverlay p {
+.welcomeMessage p {
   font-size: 16px;
   color: #64748b;
   margin: 0;
@@ -172,6 +486,9 @@
 /* Right Section */
 .rightSection {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 2rem;
 }
 
@@ -309,10 +626,6 @@
   font-weight: 500;
 }
 
-.expansologo{
-  width: 55px;
-}
-
 .validationMessage.success {
   color: #10b981;
 }
@@ -366,6 +679,7 @@
 
 /* Account Link */
 .account {
+  font-size: 14px;
   margin-top: 1rem;
   text-align: center;
   color: #6b7280;
@@ -424,11 +738,12 @@
     min-height: 40vh;
   }
   
-  .Personimage {
-    max-width: 300px;
+  .dashboardPreview,
+  .financialElements {
+    max-width: 350px;
   }
   
-  .illustrationOverlay {
+  .welcomeMessage {
     margin-top: 1rem;
     padding: 1rem;
   }
@@ -469,15 +784,16 @@
     font-size: 28px;
   }
   
-  .Personimage {
-    max-width: 250px;
+  .dashboardPreview,
+  .financialElements {
+    max-width: 300px;
   }
   
-  .illustrationOverlay h3 {
+  .welcomeMessage h3 {
     font-size: 20px;
   }
   
-  .illustrationOverlay p {
+  .welcomeMessage p {
     font-size: 14px;
   }
 }
@@ -507,5 +823,20 @@
   
   .floatingElement {
     display: none;
+  }
+  
+  .dashboardPreview,
+  .financialElements {
+    max-width: 280px;
+  }
+  
+  .floatingCard {
+    width: 240px;
+    height: 150px;
+    padding: 1rem;
+  }
+  
+  .transactionList {
+    width: 180px;
   }
 }
