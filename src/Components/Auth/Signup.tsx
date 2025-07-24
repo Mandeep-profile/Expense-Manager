@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { FormData } from "../../Utils/JsonData";
-import personImg from "../../assets/Person__Image.png";
 import ExpansoLogo from "../../assets/Expanso_Logo.png"
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";

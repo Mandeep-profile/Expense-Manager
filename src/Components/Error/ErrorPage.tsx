@@ -1,23 +1,17 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { 
-  Home, 
-  ArrowLeft, 
-  Search, 
+import { useNavigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  Search,
   CreditCard,
   Compass,
   RefreshCw,
   MapPin,
-  Zap
-} from 'lucide-react';
-import styles from './ErrorPage.module.css';
+  Zap,
+} from "lucide-react";
+import styles from "./ErrorPage.module.css";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
-
-  const handleGoHome = () => {
-    navigate('/dashboard');
-  };
 
   const handleGoBack = () => {
     navigate(-1);
@@ -29,7 +23,6 @@ const ErrorPage = () => {
 
   return (
     <div className={styles.wrapper}>
-      {/* Floating Background Elements */}
       <div className={styles.backgroundElements}>
         <div className={styles.floatingElement}></div>
         <div className={styles.floatingElement}></div>
@@ -37,7 +30,6 @@ const ErrorPage = () => {
         <div className={styles.floatingElement}></div>
       </div>
 
-      {/* Logo Section */}
       <div className={styles.logoSection}>
         <div className={styles.logoContainer}>
           <div className={styles.logoIconContainer}>
@@ -51,9 +43,7 @@ const ErrorPage = () => {
       </div>
 
       <div className={styles.container}>
-        {/* Main Error Content */}
         <div className={styles.errorContent}>
-          {/* Animated 404 Number */}
           <div className={styles.errorNumber}>
             <span className={styles.digit}>4</span>
             <div className={styles.zeroContainer}>
@@ -66,15 +56,14 @@ const ErrorPage = () => {
             <span className={styles.digit}>4</span>
           </div>
 
-          {/* Error Message */}
           <div className={styles.errorMessage}>
             <h1>Oops! Page Not Found</h1>
-            <p>The page you're looking for seems to have wandered off into the financial void. Don't worry, we'll help you get back on track!</p>
+            <p>
+              The page you're looking for seems to have wandered off into the
+              financial void. Don't worry, we'll help you get back on track!
+            </p>
           </div>
-
-          {/* Interactive Elements */}
           <div className={styles.interactiveElements}>
-            {/* Floating Financial Icons */}
             <div className={styles.floatingIcons}>
               <div className={styles.floatingIcon}>
                 <Compass size={24} />
@@ -89,8 +78,6 @@ const ErrorPage = () => {
                 <Search size={18} />
               </div>
             </div>
-
-            {/* Animated Credit Card */}
             <div className={styles.errorCard}>
               <div className={styles.cardHeader}>
                 <div className={styles.cardChip}></div>
@@ -104,13 +91,12 @@ const ErrorPage = () => {
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className={styles.actionButtons}>            
+          <div className={styles.actionButtons}>
             <button className={styles.secondaryButton} onClick={handleGoBack}>
               <ArrowLeft size={20} />
               Go Back
             </button>
-            
+
             <button className={styles.tertiaryButton} onClick={handleRefresh}>
               <RefreshCw size={20} />
               Refresh Page

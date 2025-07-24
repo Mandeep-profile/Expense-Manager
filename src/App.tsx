@@ -18,6 +18,7 @@ import {
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import ErrorPage from "./Components/Error/ErrorPage";
+// import LandingPage from "./Components/LandingPage/LandingPage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -25,6 +26,7 @@ function AnimatedRoutes() {
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
+        {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/" element={<Signup />} />
         <Route path="*" element={<ErrorPage />} />
         <Route
@@ -38,40 +40,46 @@ function AnimatedRoutes() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute requireAuth={true} requireSetup={true}>
               <Dashboard />
             </ProtectedRoute>
           }
         />
-        <Route path="/setup" element={<UserSetup />} />
+        <Route
+          path="/setup"
+          element={
+            <ProtectedRoute requireAuth={true}>
+              <UserSetup />
+            </ProtectedRoute>
+          }
+        />
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route
             path="/addexpense"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute requireAuth={true} requireSetup={true}>
                 <AddExpense />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/report" element={<Report />} />
-          <Route
-            path="/settings"
-            element={
-              <ProtectedRoute>
-                <Settings />
               </ProtectedRoute>
             }
           />
           <Route
             path="/ViewInsights"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute requireAuth={true} requireSetup={true}>
                 <ViewInsights />
               </ProtectedRoute>
             }
           />
-          <Route path="/settings" element={<Settings />} />
+          <Route
+            path="/settings"
+            element={
+              <ProtectedRoute
+                requireAuth={true}
+                requireSetup={true}
+              ><Settings /></ProtectedRoute>
+            }
+          />
         </Route>
       </Routes>
     </AnimatePresence>

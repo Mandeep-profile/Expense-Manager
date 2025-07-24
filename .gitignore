@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+LandingPage.tsx
 TagInput.tsx
 TagInput.module.css
 UserSetup.tsx

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ExpansoLogo from "../../assets/Expanso_Logo.png"
-import personImg from "../../assets/Person__Image.png";
+import ExpansoLogo from "../../assets/Expanso_Logo.png";
 import { LoginFormData } from "../../Utils/JsonData";
 import { Link } from "react-router-dom";
 import styles from "./Auth.module.css";
@@ -53,7 +52,12 @@ const Login = () => {
     if (matchedUser) {
       localStorage.setItem("isAuthenticated", "true");
       localStorage.setItem("currentuser", JSON.stringify(matchedUser));
-      navigate("/dashboard");
+
+      if (matchedUser.setupCompleted) {
+        navigate("/dashboard", { replace: true });
+      } else {
+        navigate("/setup", { replace: true });
+      }
     } else {
       toast.error("Invalid Credentials");
     }
