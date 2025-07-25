@@ -94,8 +94,8 @@ const ViewInsights = () => {
   }));
 
   const totalExpenses = expenses.reduce((sum, item) => sum + Number(item.amount), 0);
-  const totalEarnings = 25000; 
-  const savingsRate = ((monthlyEarnings.income - totalExpenses) / totalEarnings * 100).toFixed(1);
+  const totalEarnings = monthlyEarnings.income; 
+  const savingsRate = ((monthlyEarnings.income - totalExpenses) / totalEarnings * 100).toFixed(2);
 
   const trendData = barChartData.slice(-6).map((item, index) => ({
     ...item,
