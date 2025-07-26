@@ -73,7 +73,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 1rem 2rem;
+  padding: 0.76rem 2rem;
   background: rgba(248, 250, 252, 0.95);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
@@ -104,7 +104,7 @@
 }
 
 .logoText {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   -webkit-background-clip: text;
