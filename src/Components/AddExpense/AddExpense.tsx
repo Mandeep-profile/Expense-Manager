@@ -23,6 +23,10 @@ const AddExpense = () => {
     date: "",
   });
 
+   const monthlyEarnings = JSON.parse(
+    localStorage.getItem("userDetails") || "{}"
+  );
+
   const dispatch = useDispatch();
 
   const userDetails = JSON.parse(localStorage.getItem("currentuser") || "{}");
@@ -143,7 +147,7 @@ const AddExpense = () => {
                 Amount
               </label>
               <div className={styles.amountWrapper}>
-                <span className={styles.currencySymbol}>₹</span>
+                <span className={styles.currencySymbol}>{monthlyEarnings.currency}</span>
                 <input
                   id="amount"
                   name="amount"
@@ -188,7 +192,7 @@ const AddExpense = () => {
               <div className={styles.summaryItem}>
                 <span className={styles.summaryLabel}>Amount:</span>
                 <span className={styles.summaryValue}>
-                  {formData.amount ? `₹${formData.amount}` : "₹0.00"}
+                  {formData.amount ? `${monthlyEarnings.currency} ${formData.amount}` : `${monthlyEarnings.currency} 0.00`}
                 </span>
               </div>
             </div>

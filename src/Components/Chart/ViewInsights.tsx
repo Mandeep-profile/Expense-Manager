@@ -109,7 +109,7 @@ const ViewInsights = () => {
           <p className={styles.tooltipLabel}>{label}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} style={{ color: entry.color }}>
-              {entry.name}: ₹{entry.value.toLocaleString()}
+              {entry.name}: {monthlyEarnings.currency} {entry.value.toLocaleString()}
             </p>
           ))}
         </div>
@@ -157,7 +157,7 @@ const ViewInsights = () => {
           </div>
           <div className={styles.statContent}>
             <h3>Total Expenses</h3>
-            <p className={styles.statValue}>₹{totalExpenses.toLocaleString()}</p>
+            <p className={styles.statValue}>{monthlyEarnings.currency} {totalExpenses.toLocaleString()}</p>
           </div>
         </motion.div>
 
@@ -171,7 +171,7 @@ const ViewInsights = () => {
           </div>
           <div className={styles.statContent}>
             <h3>Total Earnings</h3>
-            <p className={styles.statValue}>₹{monthlyEarnings.income || 0}</p>
+            <p className={styles.statValue}>{monthlyEarnings.currency} {monthlyEarnings.income || 0}</p>
           </div>
         </motion.div>
 
@@ -327,7 +327,7 @@ const ViewInsights = () => {
                   </div>
                   <div className={styles.categoryInfo}>
                     <span className={styles.categoryName}>{entry.name}</span>
-                    <span className={styles.categoryAmount}>₹{entry.value.toLocaleString()}</span>
+                    <span className={styles.categoryAmount}>{monthlyEarnings.currency} {entry.value.toLocaleString()}</span>
                     <span className={styles.categoryPercentage}>
                       {((entry.value / totalExpenses) * 100).toFixed(1)}%
                     </span>

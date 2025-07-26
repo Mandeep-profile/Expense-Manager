@@ -302,7 +302,7 @@ const Dashboard = () => {
                       </span>
                     </li>
                     <li className={styles.dateCell}>{field.date}</li>
-                    <li className={styles.amountCell}>₹ {field.amount}</li>
+                    <li className={styles.amountCell}>{monthlyEarnings.currency} {field.amount}</li>
                     <li className={styles.actionCell}>
                       <div className={styles.actionButtons}>
                         <button
