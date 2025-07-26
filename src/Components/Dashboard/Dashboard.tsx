@@ -27,6 +27,8 @@ const Dashboard = () => {
     localStorage.getItem("userDetails") || "{}"
   );
 
+  console.log(monthlyEarnings);
+
   const userDetails = JSON.parse(localStorage.getItem("currentuser") || "{}");
   const userEmail = userDetails?.email;
 
@@ -204,7 +206,7 @@ const Dashboard = () => {
                       : styles.cardAmount
                   }`}
                 >
-                  ₹ {monthlyEarnings.income - currentExpenditure || 0}
+                  {monthlyEarnings.currency} {monthlyEarnings.income - currentExpenditure || 0}
                 </p>
 
                 <span className={styles.cardSubtext}>Available balance</span>
@@ -221,7 +223,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <h3>Current Month Expenditure</h3>
-                <p className={styles.cardAmount}>₹ {currentExpenditure}</p>
+                <p className={styles.cardAmount}>{monthlyEarnings.currency} {currentExpenditure}</p>
                 <span className={styles.cardSubtext}>
                   Total spent this month
                 </span>
@@ -238,7 +240,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <h3>Current Month Earnings</h3>
-                <p className={styles.cardAmount}>₹ {monthlyEarnings.income || 0}</p>
+                <p className={styles.cardAmount}>{monthlyEarnings.currency} {monthlyEarnings.income || 0}</p>
                 <span className={styles.cardSubtext}>
                   Total earned this month
                 </span>

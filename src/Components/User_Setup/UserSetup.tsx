@@ -22,7 +22,7 @@ const UserSetup = () => {
     email: "",
     income: "",
     goal: "",
-    currency: "INR",
+    currency: "₹",
     startDate: "",
   });
 
@@ -147,10 +147,10 @@ const UserSetup = () => {
                 Preferred Currency *
               </label>
               <select name="currency" id="currency" value={user.currency} onChange={handleChange}>
-                <option value="INR">₹ Indian Rupee (INR)</option>
-                <option value="USD">$ US Dollar (USD)</option>
-                <option value="EUR">€ Euro (EUR)</option>
-                <option value="GBP">£ British Pound (GBP)</option>
+                <option value="₹">₹ Indian Rupee (INR)</option>
+                <option value="$">$ US Dollar (USD)</option>
+                <option value="€">€ Euro (EUR)</option>
+                <option value="£">£ British Pound (GBP)</option>
               </select>
             </div>
 
