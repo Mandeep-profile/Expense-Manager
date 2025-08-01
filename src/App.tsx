@@ -6,7 +6,6 @@ import ProtectedRoute from "./Components/Auth/ProtectedRoute";
 import Layout from "./Components/Dashboard/Layout";
 import PageLayout from "./Components/Loader/PageLayout";
 import AddExpense from "./Components/AddExpense/AddExpense";
-import Report from "./Components/Report/Report";
 import Settings from "./Components/Settings/Settings";
 import ViewInsights from "./Components/Chart/ViewInsights";
 import UserSetup from "./Components/User_Setup/UserSetup";
@@ -18,7 +17,6 @@ import {
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import ErrorPage from "./Components/Error/ErrorPage";
-// import LandingPage from "./Components/LandingPage/LandingPage";
 
 function AnimatedRoutes() {
   const location = useLocation();
